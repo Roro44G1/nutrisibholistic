@@ -1,0 +1,188 @@
+/* PASUL 2: Copiați acest cod CSS în Aspect > Personalizare > CSS Adițional */
+/* pentru zaharide*/
+/* Se asigură că fontul Inter este încărcat */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+/* Definirea variabilelor de culoare */
+.zaharide-container-final {
+    --dark-blue: #0A2463;
+    --medium-blue: #3E92CC;
+    --text-dark: #212529;
+    --text-light: #475569;
+    --bg-white: #ffffff;
+    --border-color: #e0e0e0;
+    --card-pale-blue: #eaf2f8;
+    --card-pale-green: #e8f8f5;
+    --card-pale-yellow: #fef9e7;
+    --card-pale-red: #fdedec;
+    --card-pale-grey: #f1f2f6;
+}
+
+/* Stilul general al containerului principal */
+.zaharide-container-final {
+    font-family: 'Inter', sans-serif;
+    line-height: 1.6;
+    color: var(--text-dark);
+    background: var(--bg-white);
+    border-radius: 15px;
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+    margin-top: 2em; /* Adaugă spațiu deasupra */
+}
+
+.zaharide-header {
+    background-color: var(--dark-blue) !important; /* Forțează culoarea de fundal */
+    color: white !important;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+/* Forțează culoarea titlului H1 din antet să fie albă */
+.zaharide-container-final .zaharide-header h1 {
+    font-family: 'Inter', sans-serif;
+    font-size: 2.2em !important;
+    font-weight: 700 !important;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+    margin: 0 !important;
+    padding: 0 !important;
+    color: white !important;
+    border: none !important;
+    background: none !important;
+}
+
+.zaharide-section {
+    padding: 20px;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.zaharide-section:last-child {
+    border-bottom: none;
+}
+
+.zaharide-section-title {
+    font-size: 1.8em;
+    color: var(--dark-blue) !important;
+    margin-bottom: 25px;
+    font-weight: 700;
+    border-bottom: 3px solid var(--medium-blue);
+    padding-bottom: 10px;
+    text-align: center;
+}
+
+.zaharide-card-grid {
+    display: grid;
+    grid-template-columns: 1fr; /* Un singur card pe rând implicit */
+    gap: 25px;
+}
+
+/* Două carduri pe rând pe ecrane mai mari */
+@media (min-width: 900px) {
+    .zaharide-card-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+}
+
+.zaharide-topic-card {
+    border-radius: 1rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    padding: 1.5rem 2rem;
+    border: 1px solid var(--border-color);
+    display: flex;
+    flex-direction: column;
+}
+
+.zaharide-topic-card.bg-pale-blue { background-color: var(--card-pale-blue); }
+.zaharide-topic-card.bg-pale-green { background-color: var(--card-pale-green); }
+.zaharide-topic-card.bg-pale-yellow { background-color: var(--card-pale-yellow); }
+.zaharide-topic-card.bg-pale-red { background-color: var(--card-pale-red); }
+.zaharide-topic-card.bg-pale-grey { background-color: var(--card-pale-grey); }
+
+.zaharide-topic-card h3 {
+    font-size: 1.4em !important;
+    font-weight: 600;
+    color: var(--dark-blue) !important;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    border-bottom: 2px solid var(--medium-blue);
+    padding-bottom: 0.5rem;
+}
+
+.zaharide-topic-card h4 {
+    font-size: 1.1em !important;
+    color: var(--medium-blue) !important;
+    font-weight: 600;
+    margin-top: 1.2rem;
+    margin-bottom: 0.5rem;
+    border: none !important;
+    padding: 0 !important;
+}
+
+.zaharide-topic-card p, .zaharide-topic-card ul, .zaharide-topic-card ol {
+    font-size: 0.95em;
+    color: var(--text-light);
+    text-align: justify;
+    margin-bottom: 10px;
+}
+
+.zaharide-topic-card ul, .zaharide-topic-card ol {
+    padding-left: 20px;
+}
+
+.zaharide-topic-card li {
+    margin-bottom: 5px;
+}
+
+.zaharide-topic-card strong {
+    color: var(--dark-blue);
+    font-weight: 600;
+}
+
+.zaharide-topic-card table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1.5rem 0;
+    font-size: 0.9em;
+}
+.zaharide-topic-card th, .zaharide-topic-card td {
+    padding: 0.75rem;
+    text-align: left;
+    border: 1px solid #d1d9e6;
+}
+.zaharide-topic-card th {
+    background-color: #e2e8f0;
+    font-weight: 600;
+    color: var(--dark-blue);
+}
+.zaharide-topic-card tr:nth-child(even) {
+    background-color: #f8fafc;
+}
+
+.zaharide-references-list {
+    padding-left: 0;
+}
+
+.zaharide-references-list p {
+    font-size: 0.8em;
+    margin-bottom: 1em;
+    word-break: break-word;
+}
+
+.zaharide-card-footer {
+    text-align: center;
+    padding: 25px 0;
+    font-size: 0.9em;
+    color: #6c757d;
+    border-top: 1px solid var(--border-color);
+    margin-top: 20px;
+}
+
+@media (min-width: 768px) {
+    .zaharide-references-list {
+        column-count: 2;
+        column-gap: 30px;
+    }
+    .zaharide-section {
+        padding: 30px 40px;
+    }
+}
