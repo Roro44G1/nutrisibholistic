@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ReDefine 2.0 - Plan de Creștere în Greutate</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Copyrights: dr.ing. Radu Pascu - 2025 -->
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #F8F7F4;
+            color: #333333;
+        }
+        .main-container { max-width: 900px; margin: 2rem auto; padding: 1rem; }
+        .card { background-color: #FFFFFF; border-radius: 12px; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); padding: 1.5rem; margin-bottom: 1.5rem; border: 1px solid #E5E7EB; }
+        .meal-card { display: flex; flex-direction: column; gap: 1rem; padding: 1rem; border-left: 4px solid; margin-bottom: 1rem; border-radius: 0 8px 8px 0; }
+        .meal-card-breakfast { border-color: #FBBF24; background-color: #FFFBEB; }
+        .meal-card-snack { border-color: #60A5FA; background-color: #EFF6FF; }
+        .meal-card-lunch { border-color: #818CF8; background-color: #EEF2FF; }
+        .meal-card-dinner { border-color: #A78BFA; background-color: #F5F3FF; }
+        b { font-weight: 600; }
+        .tab-buttons { display: flex; border-bottom: 1px solid #D1D5DB; margin-bottom: 1.5rem; justify-content: center; flex-wrap: wrap; gap: 0.5rem; }
+        .tab-button { padding: 0.75rem 1.5rem; border: none; background-color: transparent; cursor: pointer; font-weight: 600; color: #6B7280; transition: all 0.2s ease-in-out; border-bottom: 3px solid transparent; margin-bottom: -2px; }
+        .tab-button.active { color: #4f46e5; border-bottom-color: #4f46e5; }
+        .tab-content { display: none; }
+        .tab-content.active { display: block; }
+        .sub-tab-buttons { display: flex; justify-content: center; margin-bottom: 1.5rem; gap: 1rem; border-bottom: 1px solid #E5E7EB; padding-bottom: 1rem; }
+        .sub-tab-button { padding: 0.5rem 1rem; border-radius: 8px; border: 1px solid #D1D5DB; background-color: white; cursor: pointer; font-weight: 500; color: #4B5563; transition: all 0.2s ease-in-out; }
+        .sub-tab-button.active { background-color: #4f46e5; color: white; border-color: #4f46e5; }
+        .sub-tab-button:hover:not(.active) { background-color: #F3F4F6; }
+        .sub-tab-content { display: none; }
+        .sub-tab-content.active { display: block; }
+        .accordion-item { border-bottom: 1px solid #e5e7eb; }
+        .accordion-button { width: 100%; padding: 1rem; display: flex; justify-content: space-between; align-items: center; background-color: #fff; border: none; text-align: left; font-size: 1.1rem; font-weight: 600; cursor: pointer; transition: background-color 0.2s ease; }
+        .accordion-button:hover { background-color: #f9fafb; }
+        .accordion-content { max-height: 0; overflow: hidden; transition: max-height 0.3s ease-out, padding 0.3s ease-out; background-color: #f9fafb; padding: 0 1.5rem; }
+        .accordion-content.open { padding: 1.5rem; }
+        .accordion-icon { transition: transform 0.3s ease; }
+        .accordion-button.open .accordion-icon { transform: rotate(45deg); }
+        .full-plan-table-container { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+        .full-plan-table { width: 100%; border-collapse: collapse; margin-top: 1rem; min-width: 800px; }
+        .full-plan-table th, .full-plan-table td { border: 1px solid #E5E7EB; padding: 0.75rem; text-align: left; vertical-align: top; font-size: 0.875rem; }
+        .full-plan-table th { background-color: #F3F4F6; font-weight: 600; color: #4B5563; }
+        .full-plan-table tr:nth-child(even) { background-color: #F9FAFB; }
+        .full-plan-table .meal-row td:first-child { font-weight: 500; }
+        .full-plan-table .total-row td { font-weight: 700; background-color: #EEF2FF; color: #4338CA; }
+        .macro-bar-container { display: flex; width: 100%; height: 1.5rem; border-radius: 8px; overflow: hidden; background-color: #e5e7eb; }
+        .macro-bar-carbs { background-color: #ef4444; }
+        .macro-bar-protein { background-color: #f59e0b; }
+        .macro-bar-fat { background-color: #3b82f6; }
+        .info-table { width: 100%; border-collapse: collapse; margin-top: 1rem; background-color: #ffffff; border-radius: 8px; overflow: hidden; }
+        .info-table th, .info-table td { border: 1px solid #E5E7EB; padding: 0.75rem; text-align: left; font-size: 0.9rem; }
+        .info-table th { background-color: #f3f4f6; font-weight: 600; color: #4b5563; }
+        .info-table tr:nth-child(even) { background-color: #f9fafb; }
+        .info-table ul, .info-table ol { list-style-position: inside; padding-left: 0.5rem; }
+        .info-table ul li, .info-table ol li { margin-bottom: 0.5rem; }
+        .list-circle { list-style-type: circle; margin-left: 1rem; }
+        .info-table ol { list-style-type: decimal; }
+    </style>
+</head>
+<body class="antialiased">
+
+    <div class="main-container">
+        
+        <header class="text-center mb-8">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-800 mb-2">ReDefine 2.0</h1>
+            <p class="text-lg text-gray-600">Plan de creștere în greutate și tonifiere musculară</p>
+        </header>
+
+        <div class="tab-buttons">
+            <button class="tab-button active" data-tab="introducere">🏠 Introducere</button>
+            <button class="tab-button" data-tab="wellnessPiloni">🧘‍♀️ 8xWellness</button>
+            <button class="tab-button" data-tab="infoIngrasare">💡 Ghid pentru Creștere în Greutate</button>
+            <button class="tab-button" data-tab="planMese">🥑 Plan de Mese</button>
+            <button class="tab-button" data-tab="planMiscareSport">🏃‍♀️ Plan de Mișcare</button>
+            <button class="tab-button" data-tab="recomandariCarti">📚 Recomandări cărți</button>
+        </div>
+
+        <div id="introducere" class="tab-content active">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4">Construiește-ți puterea: o nouă viziune asupra corpului tău</h2>
+                <p class="text-gray-600 mb-4">Acest plan este dedicat unei tinere studente de 20 de ani, cu o greutate de 40 kg, care își dorește să câștige în greutate într-un mod sănătos, construind masă musculară și tonifiindu-și corpul. Obiectivul nu este doar un număr pe cântar, ci dobândirea unei noi forțe, vitalități și a unei încrederi depline în propria persoană.</p>
+                <p class="text-gray-600 mb-4">Dificultatea de a câștiga în greutate (constituție ectomorfă) necesită o abordare la fel de structurată și inteligentă ca un plan de slăbire. Cheia este un surplus caloric controlat, bazat pe alimente dense nutritiv, combinat cu un program de antrenament de forță care să semnalizeze corpului să construiască mușchi, nu doar să depună grăsime.</p>
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 mt-8">O călătorie către forță și încredere</h2>
+                <p class="text-gray-600 mb-4">Acest program este mai mult decât un plan alimentar și de sport; este o invitație la a-ți redescoperi și construi puterea interioară și exterioară. Fiecare masă este o cărămidă, fiecare antrenament este fundația. Vei învăța să-ți hrănești corpul pentru performanță și creștere, nu doar pentru subzistență.</p>
+                <p class="text-gray-600">Imaginează-ți cum te vei simți având mai multă energie la cursuri, forța de a-ți depăși limitele în sala de sport și, cel mai important, încrederea care vine odată ce realizezi de ce ești capabilă. Ești în controlul acestei transformări, iar eu sunt aici pentru a-ți oferi harta și uneltele necesare. Hai să construim împreună cea mai puternică versiune a ta!</p>
+            </div>
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                Copyrights: dr.ing. Radu Pascu - 2025
+            </footer>
+        </div>
+
+        <div id="wellnessPiloni" class="tab-content">
+            <div class="card p-0">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Cei 8 Piloni ai Stării de Bine (Wellness)</h2>
+                <p class="text-gray-600 mb-4 px-6">Wellness-ul este o abordare holistică a sănătății, care recunoaște interconectarea dintre minte, corp și spirit. Pentru a atinge o stare de echilibru și vitalitate, este esențial să cultivăm fiecare dintre acești piloni.</p>
+                <div id="wellnessAccordion"></div>
+            </div>
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                Copyrights: dr.ing. Radu Pascu - 2025
+            </footer>
+        </div>
+
+        <div id="infoIngrasare" class="tab-content">
+            <div class="card p-0">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 p-6 text-center">Ghid pentru Creșterea Sănătoasă în Greutate</h2>
+                <p class="text-gray-600 mb-4 px-6">A fi subponderal poate prezenta propriul set de provocări, atât fizice, cât și emoționale. O greutate corporală foarte scăzută (sugerată de un Indice de Masă Corporală sub 18.5) nu este doar o problemă estetică, ci poate afecta funcționarea optimă a organismului. Acest ghid explică de ce este important să abordăm această problemă și cum o putem face corect.</p>
+                <div id="ingrasareAccordion"></div>
+            </div>
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                Copyrights: dr.ing. Radu Pascu - 2025
+            </footer>
+        </div>
+        
+        <div id="planMese" class="tab-content">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Obiective și principii nutriționale pentru creștere</h2>
+                <p class="mb-4 text-gray-700 text-center">Acest plan alimentar vizează un aport de aproximativ <b>1900 kcal/zi</b>, cu un aport proteic constant pentru a susține creșterea în masă musculară.</p>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li><b>Obiectiv:</b> Creștere în greutate prin masă musculară.</li>
+                            <li><b>Aport caloric țintă:</b> ~1900 kcal/zi.</li>
+                            <li><b>Aport proteic țintă:</b> ~100 g/zi.</li>
+                            <li><b>Aport grăsimi sănătoase:</b> ~50 g/zi.</li>
+                             <li><b>Aport carbohidrați țintă:</b> ~263 g/zi.</li>
+                            <li><b>Frecvența meselor:</b> 3 mese principale + 2 gustări.</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="font-semibold text-gray-700 mb-2">Distribuția macronutrienților (țintă)</h3>
+                        <div class="space-y-2">
+                            <div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-red-700">Carbohidrați (~55%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-carbs" style="width: 55%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-amber-700">Proteine (~21%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-protein" style="width: 21%"></div></div>
+                            </div>
+                            <div>
+                                <div class="flex justify-between mb-1"><span class="text-sm font-medium text-blue-700">Grăsimi (~24%)</span></div>
+                                <div class="macro-bar-container"><div class="macro-bar-fat" style="width: 24%"></div></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="sub-tab-buttons">
+                <button class="sub-tab-button active" data-tab="dailyPlanView">Plan zilnic</button>
+                <button class="sub-tab-button" data-tab="weeklyPlanView">Plan săptămânal</button>
+                <button class="sub-tab-button" data-tab="fullTableView">Tabel centralizat</button>
+            </div>
+
+            <div id="dailyPlanView" class="sub-tab-content active">
+                <div class="card">
+                    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Selectează o zi pentru planul de mese</h2>
+                    <select id="daySelector" class="mx-auto block w-full max-w-xs p-2 border rounded-md shadow-sm"></select>
+                </div>
+                <div id="mealPlanDisplay"></div>
+            </div>
+
+            <div id="weeklyPlanView" class="sub-tab-content">
+                <div class="card">
+                    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Selectează o săptămână</h2>
+                    <select id="weekSelector" class="mx-auto block w-full max-w-xs p-2 border rounded-md shadow-sm">
+                        <option value="1">Săptămâna 1 (Zilele 1-7)</option>
+                        <option value="2">Săptămâna 2 (Zilele 8-14)</option>
+                        <option value="3">Săptămâna 3 (Zilele 15-21)</option>
+                        <option value="4">Săptămâna 4 (Zilele 22-28)</option>
+                    </select>
+                </div>
+                <div id="weeklyPlanDisplay"></div>
+            </div>
+
+            <div id="fullTableView" class="sub-tab-content">
+                <div class="card">
+                    <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Tabel centralizat - plan de mese (28 zile)</h2>
+                    <div class="full-plan-table-container">
+                        <table class="full-plan-table">
+                            <thead>
+                                <tr>
+                                    <th>Ziua</th>
+                                    <th>Meniu</th>
+                                    <th>Alimente și cantități</th>
+                                    <th>Kcal</th>
+                                    <th>Proteine (g)</th>
+                                    <th>Carbohidrați (g)</th>
+                                    <th>Grăsimi (g)</th>
+                                    <th>Fibre (g)</th>
+                                </tr>
+                            </thead>
+                            <tbody id="fullPlanTableBody"></tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                Copyrights: dr.ing. Radu Pascu - 2025
+            </footer>
+        </div>
+
+        <div id="planMiscareSport" class="tab-content">
+             <div class="card">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Plan de Mișcare pentru Tonifiere și Creștere în Masă Musculară</h2>
+                <p class="text-gray-600 mb-4">Acest plan este conceput pentru a stimula creșterea masei musculare (hipertrofie), esențială pentru o îngrășare sănătoasă și o tonifiere armonioasă. Ne vom concentra pe exerciții de forță, cu progresie treptată în greutăți.</p>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Principii de bază:</h3>
+                        <ul class="list-disc list-inside space-y-1 text-gray-600">
+                            <li><b>Supraîncărcarea progresivă:</b> Pentru a crește, mușchii trebuie provocați. Asta înseamnă să crești treptat greutatea, numărul de repetări sau de seturi.</li>
+                            <li><b>Forma corectă > Greutatea:</b> Execuția corectă este crucială pentru a activa mușchii potriviți și a preveni accidentările. Începe cu greutăți mici pentru a învăța mișcarea.</li>
+                            <li><b>Conexiunea minte-mușchi:</b> Concentrează-te pe mușchiul pe care îl lucrezi în timpul fiecărei repetări.</li>
+                            <li><b>Odihna este vitală:</b> Mușchii cresc în perioadele de repaus, nu în timpul antrenamentului. Asigură-te că dormi suficient (7-9 ore).</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">Structura săptămânală (3 zile de antrenament):</h3>
+                         <p class="text-gray-600 mb-2">Acest program se bazează pe 3 antrenamente pe săptămână, permițând suficient timp pentru recuperare. Poți alege zilele care ți se potrivesc, de ex: Luni, Miercuri, Vineri.</p>
+                        <ul class="list-disc list-inside space-y-2 text-gray-600">
+                            <li><b>Ziua 1: Tren Inferior (Picioare & Fesieri)</b>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>Genuflexiuni cu bara (sau gantere): 4 seturi x 8-12 repetări</li>
+                                    <li>Fandări cu gantere: 3 seturi x 10-12 repetări pe picior</li>
+                                    <li>Ridicări de bazin (Hip Thrust) cu bara: 4 seturi x 10-15 repetări</li>
+                                    <li>Presă pentru picioare (dacă ai acces): 3 seturi x 10-15 repetări</li>
+                                    <li>Flexii pentru femurali: 3 seturi x 12-15 repetări</li>
+                                </ul>
+                            </li>
+                            <li><b>Ziua 2: Tren Superior (Spate, Umeri, Piept)</b>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>Ramat cu gantera: 3 seturi x 8-12 repetări pe braț</li>
+                                    <li>Tracțiuni la helcometru (cu priză largă): 3 seturi x 10-12 repetări</li>
+                                    <li>Împins la piept cu gantere (pe bancă orizontală sau înclinată): 3 seturi x 8-12 repetări</li>
+                                    <li>Presă militară cu gantere (din șezut): 3 seturi x 8-12 repetări</li>
+                                    <li>Ridicări laterale cu gantere pentru umeri: 3 seturi x 12-15 repetări</li>
+                                </ul>
+                            </li>
+                             <li><b>Ziua 3: Full Body & Brațe</b>
+                                <ul class="list-circle list-inside ml-4">
+                                    <li>Îndreptări românești cu gantere: 3 seturi x 10-12 repetări</li>
+                                    <li>Flotări (pe genunchi sau standard): 3 seturi x câte repetări poți</li>
+                                    <li>Flexii pentru biceps cu gantere: 3 seturi x 10-12 repetări</li>
+                                    <li>Extensii pentru triceps deasupra capului: 3 seturi x 10-12 repetări</li>
+                                    <li>Scândură (Plank): 3 seturi x 30-60 secunde</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                Copyrights: dr.ing. Radu Pascu - 2025
+            </footer>
+        </div>
+
+        <div id="recomandariCarti" class="tab-content">
+            <div class="card">
+                <h2 class="text-2xl font-bold text-gray-700 mb-4 text-center">Recomandări de Cărți pentru Încredere și Dezvoltare</h2>
+                <p class="text-gray-600 mb-6 text-center">O selecție de titluri pentru o tânără studentă, menite să ofere unelte pentru creșterea încrederii în sine, navigarea interacțiunilor sociale și dezvoltare personală.</p>
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">1. Curajul de a fi vulnerabil <span class="font-normal text-gray-600">de Brené Brown</span></h3>
+                        <p class="text-gray-600">O carte fundamentală care redefinește curajul. Brown argumentează că vulnerabilitatea nu este o slăbiciune, ci calea către o viață autentică, conexiuni reale și curaj. Perfectă pentru a depăși teama de a te deschide în fața celorlalți.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">2. Liniștea: Puterea introvertiților într-o lume care nu mai poate tăcea <span class="font-normal text-gray-600">de Susan Cain</span></h3>
+                        <p class="text-gray-600">Această carte este o celebrare a introvertiților. Te va ajuta să înțelegi că stilul tău retras este o superputere, nu un defect, și îți va oferi strategii pentru a prospera într-o lume zgomotoasă, fără a te preface cine nu ești.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">3. Mindset: Noua psihologie a succesului <span class="font-normal text-gray-600">de Carol S. Dweck</span></h3>
+                        <p class="text-gray-600">Dweck explică diferența dintre o mentalitate fixă și una de creștere. Este o lectură esențială pentru a înțelege că abilitățile (inclusiv cele sociale) pot fi dezvoltate prin efort și perseverență, ajutându-te să abordezi provocările cu mai mult optimism.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">4. Cum să ne facem prieteni și să influențăm oamenii <span class="font-normal text-gray-600">de Dale Carnegie</span></h3>
+                        <p class="text-gray-600">Deși titlul poate suna manipulator, cartea este un ghid clasic și plin de respect despre principiile comunicării umane. Oferă sfaturi practice și atemporale despre cum să asculți, să porți o conversație și să construiești relații autentice.</p>
+                    </div>
+                    <div>
+                        <h3 class="text-xl font-bold text-gray-800 mb-2">5. Arta subtilă a nepăsării <span class="font-normal text-gray-600">de Mark Manson</span></h3>
+                        <p class="text-gray-600">O abordare contra-intuitivă, dar extrem de utilă, a dezvoltării personale. Manson te învață să nu-ți mai faci griji pentru lucrurile nesemnificative și să-ți concentrezi energia pe ceea ce contează cu adevărat pentru tine. Ideală pentru a reduce anxietatea socială legată de părerea celorlalți.</p>
+                    </div>
+                </div>
+            </div>
+            <footer class="text-center mt-8 text-sm text-gray-500">
+                Copyrights: dr.ing. Radu Pascu - 2025
+            </footer>
+        </div>
+
+    </div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        
+        function handleTabSwitch(options) {
+            const { button, buttonSelector, contentSelector, container } = options;
+            if (!button) return;
+            const tabId = button.dataset.tab;
+
+            container.querySelectorAll(buttonSelector).forEach(btn => btn.classList.remove('active'));
+            container.querySelectorAll(contentSelector).forEach(content => {
+                content.classList.remove('active');
+                content.style.display = 'none';
+            });
+
+            button.classList.add('active');
+            const activeContent = container.querySelector(`#${tabId}`);
+            if (activeContent) {
+                activeContent.classList.add('active');
+                activeContent.style.display = 'block';
+            }
+        }
+
+        const mainContainer = document.querySelector('.main-container');
+        const planMeseContainer = document.getElementById('planMese');
+        const daySelector = document.getElementById('daySelector');
+        const weekSelector = document.getElementById('weekSelector');
+        const mealPlanDisplay = document.getElementById('mealPlanDisplay');
+        const weeklyPlanDisplay = document.getElementById('weeklyPlanDisplay');
+        const fullPlanTableBody = document.getElementById('fullPlanTableBody');
+        const wellnessAccordion = document.getElementById('wellnessAccordion');
+        const ingrasareAccordion = document.getElementById('ingrasareAccordion');
+        
+        mainContainer.querySelectorAll('.tab-button').forEach(button => {
+            button.addEventListener('click', () => handleTabSwitch({ button, buttonSelector: '.tab-button', contentSelector: '.tab-content', container: mainContainer }));
+        });
+
+        if (planMeseContainer) {
+            planMeseContainer.querySelectorAll('.sub-tab-button').forEach(button => {
+                button.addEventListener('click', () => handleTabSwitch({ button, buttonSelector: '.sub-tab-button', contentSelector: '.sub-tab-content', container: planMeseContainer }));
+            });
+        }
+        
+        const wellnessData = [
+            { icon: '🧘‍♀️', title: 'Wellness fizic', content: 'Reprezintă grija față de corpul nostru prin nutriție adecvată, mișcare regulată și odihnă suficientă. Este fundamentul pe care se construiește întreaga noastră stare de bine.' },
+            { icon: '🧠', title: 'Wellness mental', content: 'Implică o minte activă, deschisă la noi idei și experiențe. Este despre învățare continuă, creativitate și curiozitate. O minte sănătoasă este esențială pentru a naviga provocările vieții.' },
+            { icon: '❤️', title: 'Wellness emoțional', content: 'Se referă la conștientizarea și acceptarea propriilor emoții, precum și la capacitatea de a gestiona stresul și de a construi relații sănătoase. Este despre a fi în contact cu sentimentele noastre și a le exprima într-un mod constructiv.' },
+            { icon: '🤝', title: 'Wellness social', content: 'Presupune construirea și menținerea unor relații sănătoase, de susținere, cu familia, prietenii și comunitatea. Conexiunile sociale puternice sunt un factor protector împotriva multor afecțiuni.' },
+            { icon: '🌱', title: 'Wellness spiritual', content: 'Se referă la sentimentul de scop și sens în viață. Poate fi legat de credințe religioase, valori personale, meditație sau conexiunea cu natura. Este ancora noastră interioară.' },
+            { icon: '🌍', title: 'Wellness de mediu', content: 'Implică recunoașterea impactului pe care mediul înconjurător îl are asupra sănătății noastre și asumarea responsabilității pentru protejarea lui. Un mediu curat și sigur este vital pentru o viață sănătoasă.' },
+            { icon: '💼', title: 'Wellness ocupațional', content: 'Se referă la satisfacția și împlinirea pe care le obținem din munca noastră. Este despre a găsi un echilibru între viața profesională și cea personală și a ne folosi talentele într-un mod care ne aduce bucurie.' },
+            { icon: '💰', title: 'Wellness financiar', content: 'Presupune o relație sănătoasă cu banii, gestionarea eficientă a resurselor financiare și planificarea pentru viitor. Stabilitatea financiară reduce stresul și contribuie la starea generală de bine.' },
+        ];
+        
+        const ingrasareData = [
+            { icon: '⚖️', title: 'De ce contează o greutate sănătoasă?', content: 'Un Indice de Masă Corporală (IMC) sub 18.5 poate indica o stare de subponderalitate. Aceasta poate duce la o serie de probleme de sănătate, inclusiv: un sistem imunitar slăbit, oboseală cronică, anemie, probleme de fertilitate și o densitate osoasă redusă (risc de osteoporoză). Scopul nu este doar estetic, ci funcțional: să oferim corpului resursele de care are nevoie pentru a funcționa la capacitate maximă.' },
+            { icon: '🤔', title: 'Provocarea constituției ectomorfe', content: 'Persoanele ectomorfe au, în mod natural, un metabolism rapid și o structură osoasă fină, ceea ce face acumularea de masă (atât musculară, cât și adipoasă) mai dificilă. Acest lucru nu este un defect, ci o particularitate metabolică. Cheia succesului nu este să mănânci "oricât și orice", ci să urmezi un plan structurat, bazat pe un surplus caloric din surse de calitate.' },
+            { icon: '🍽️', title: 'Principiul surplusului caloric controlat', content: 'Pentru a câștiga în greutate, trebuie să consumi mai multe calorii decât arzi. Însă, un surplus haotic, bazat pe alimente procesate și zahăr, va duce la acumularea de grăsime nesănătoasă. Un surplus controlat (aprox. 300-500 kcal peste necesarul de menținere), bogat în proteine, carbohidrați complecși și grăsimi sănătoase, va favoriza construirea de masă musculară, mai ales dacă este combinat cu antrenament de forță.' },
+            { icon: '💪', title: 'Rolul proteinelor și al antrenamentului de forță', content: 'Proteinele sunt "cărămizile" din care se construiesc mușchii. Fără un aport proteic adecvat, caloriile suplimentare se vor depune predominant ca grăsime. Antrenamentul cu greutăți este semnalul care îi spune corpului să folosească acele proteine pentru a repara și a construi țesut muscular. Cele două lucrează în sinergie perfectă.' },
+        ];
+
+        let mealPlanData = [];
+
+        function generateMealPlan() {
+            const fixedMealPlans = [
+                // Day 1
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: 'Smoothie: 1 banană, 200ml lapte 3.5%, 20g unt arahide', kcal: 420, protein: 15, fat: 20, fiber: 6 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g piept de pui, 250g orez alb, salată cu 10ml ulei', kcal: 750, protein: 40, fat: 15, fiber: 8 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 Baton proteic H24', kcal: 140, protein: 10, fat: 5, fiber: 3 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Omletă din 3 ouă cu 50g brânză telemea, spanac', kcal: 380, protein: 25, fat: 28, fiber: 2 }
+                ],
+                // Day 2
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '1 Baton proteic H24, 30g nuci', kcal: 330, protein: 16, fat: 23, fiber: 5 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g vită, 300g cartofi, broccoli', kcal: 700, protein: 45, fat: 20, fiber: 12 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '200g iaurt grecesc 10%', kcal: 200, protein: 18, fat: 20, fiber: 0 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: '180g cod la cuptor cu 200g fasole verde și usturoi', kcal: 390, protein: 42, fat: 15, fiber: 8 }
+                ],
+                // Day 3
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '150g iaurt grecesc 10%, 20g miere, 20g nuci', kcal: 350, protein: 15, fat: 28, fiber: 2 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g somon, 150g paste integrale, sos de roșii', kcal: 800, protein: 40, fat: 30, fiber: 15 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 Baton proteic H24', kcal: 140, protein: 10, fat: 5, fiber: 3 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Salată cu 200g năut, 100g brânză Feta, legume', kcal: 480, protein: 25, fat: 30, fiber: 15 }
+                ],
+                // Day 4
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '1 Baton proteic H24, 1 banană', kcal: 245, protein: 11, fat: 5, fiber: 6 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '180g curcan, 150g quinoa, 50g avocado', kcal: 750, protein: 50, fat: 25, fiber: 16 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '2 ouă fierte, 1 felie pâine integrală', kcal: 240, protein: 15, fat: 11, fiber: 4 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Supă cremă de linte (100g linte uscată)', kcal: 400, protein: 25, fat: 5, fiber: 18 }
+                ],
+                // Day 5
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '100g brânză vaci 5%, 30g semințe, 1 felie pâine integrală', kcal: 320, protein: 22, fat: 18, fiber: 6 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: 'Paste integrale (150g crude) cu sos Pesto (50g)', kcal: 750, protein: 30, fat: 28, fiber: 18 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 Baton proteic H24', kcal: 140, protein: 10, fat: 5, fiber: 3 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: '180g păstrăv la cuptor cu legume la grătar', kcal: 450, protein: 40, fat: 28, fiber: 8 }
+                ],
+                // Day 6
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '1 Baton proteic H24, 150g iaurt grecesc 10%', kcal: 280, protein: 25, fat: 20, fiber: 3 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g piept de pui, 300g cartofi, salată', kcal: 650, protein: 45, fat: 15, fiber: 10 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '100g brânză vaci 5%, 30g semințe, 1 felie pâine integrală', kcal: 320, protein: 22, fat: 18, fiber: 6 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Salată: 200g năut, 120g Feta, legume, 10ml ulei', kcal: 520, protein: 28, fat: 35, fiber: 15 }
+                ],
+                // Day 7
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '150g iaurt grecesc 10%, 20g miere, 20g nuci', kcal: 350, protein: 15, fat: 28, fiber: 2 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g somon, 150g paste integrale, sos roșii', kcal: 800, protein: 40, fat: 30, fiber: 15 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 Baton proteic H24, 30g nuci', kcal: 330, protein: 16, fat: 23, fiber: 5 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Omletă 3 ouă, 50g cașcaval, salată', kcal: 450, protein: 30, fat: 35, fiber: 4 }
+                ],
+                // Day 8
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '1 Baton proteic H24, 1 banană', kcal: 245, protein: 11, fat: 5, fiber: 6 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '200g tofu, 250g orez, legume la tigaie', kcal: 650, protein: 25, fat: 20, fiber: 12 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: 'Smoothie: 1 banană, 200ml lapte 3.5%, 20g unt arahide', kcal: 420, protein: 15, fat: 20, fiber: 6 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: '200g somon afumat, 100g cremă de brânză, 2 felii pâine secară', kcal: 550, protein: 35, fat: 30, fiber: 8 }
+                ],
+                // Day 9
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '150g iaurt grecesc 10%, 20g miere, 20g nuci', kcal: 350, protein: 15, fat: 28, fiber: 2 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g vită, 300g cartofi, broccoli', kcal: 700, protein: 45, fat: 20, fiber: 12 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 Baton proteic H24', kcal: 140, protein: 10, fat: 5, fiber: 3 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: '180g cod, 200g piure mazăre, 10ml ulei măsline', kcal: 480, protein: 45, fat: 18, fiber: 12 }
+                ],
+                // Day 10
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '1 Baton proteic H24, 30g nuci', kcal: 330, protein: 16, fat: 23, fiber: 5 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '180g curcan, 150g quinoa, 50g avocado', kcal: 750, protein: 50, fat: 25, fiber: 16 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '200g iaurt grecesc 10%', kcal: 200, protein: 18, fat: 20, fiber: 0 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Omletă 3 ouă, 50g cașcaval, salată', kcal: 450, protein: 30, fat: 35, fiber: 4 }
+                ],
+                // Day 11
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: 'Smoothie: 1 banană, 200ml lapte 3.5%, 20g unt arahide', kcal: 420, protein: 15, fat: 20, fiber: 6 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g piept de pui, 250g orez, salată', kcal: 750, protein: 40, fat: 15, fiber: 8 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 Baton proteic H24', kcal: 140, protein: 10, fat: 5, fiber: 3 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Salată cu 200g năut, 100g brânză Feta, legume', kcal: 480, protein: 25, fat: 30, fiber: 15 }
+                ],
+                // Day 12
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '1 Baton proteic H24, 150g iaurt grecesc 10%', kcal: 280, protein: 25, fat: 20, fiber: 3 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g somon, 150g paste integrale, sos de roșii', kcal: 800, protein: 40, fat: 30, fiber: 15 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '100g brânză vaci 5%, 30g semințe, 1 felie pâine integrală', kcal: 320, protein: 22, fat: 18, fiber: 6 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: '180g cod la cuptor cu 200g fasole verde și usturoi', kcal: 390, protein: 42, fat: 15, fiber: 8 }
+                ],
+                // Day 13
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '150g iaurt grecesc 10%, 20g miere, 20g nuci', kcal: 350, protein: 15, fat: 28, fiber: 2 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '150g vită, 300g cartofi, broccoli', kcal: 700, protein: 45, fat: 20, fiber: 12 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: '1 Baton proteic H24, 1 banană', kcal: 245, protein: 11, fat: 5, fiber: 6 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: '200g tofu la grătar cu 200g ciuperci sote', kcal: 400, protein: 28, fat: 25, fiber: 6 }
+                ],
+                // Day 14
+                [
+                    { name: 'Mic dejun', icon: '☀️', type: 'breakfast', food: 'Shake Herbalife (2 linguri F1 + 2 linguri PDM) cu apă, 1 lingură Fibre de măr și ovăz, 1 lingură Beta Heart.', kcal: 225, protein: 20.5, fat: 5.5, fiber: 11 },
+                    { name: 'Gustare 1', icon: '🍎', type: 'snack', food: '1 Baton proteic H24, 30g nuci', kcal: 330, protein: 16, fat: 23, fiber: 5 },
+                    { name: 'Prânz', icon: '🍝', type: 'lunch', food: '180g curcan, 150g quinoa, 50g avocado', kcal: 750, protein: 50, fat: 25, fiber: 16 },
+                    { name: 'Gustare 2', icon: '🍋', type: 'snack', food: 'Smoothie: 1 banană, 200ml lapte 3.5%, 20g unt arahide', kcal: 420, protein: 15, fat: 20, fiber: 6 },
+                    { name: 'Cină', icon: '🌙', type: 'dinner', food: 'Omletă 3 ouă, 50g cașcaval, salată', kcal: 450, protein: 30, fat: 35, fiber: 4 }
+                ]
+            ];
+
+            const generatedPlans = [];
+            for (let i = 1; i <= 28; i++) {
+                const planOfTheDay = fixedMealPlans[(i - 1) % 14];
+                
+                const totals = planOfTheDay.reduce((acc, meal) => {
+                    acc.kcal += meal.kcal || 0;
+                    acc.protein += meal.protein || 0;
+                    acc.fat += meal.fat || 0;
+                    acc.fiber += meal.fiber || 0;
+                    return acc;
+                }, { kcal: 0, protein: 0, fat: 0, fiber: 0 });
+
+                const proteinKcal = totals.protein * 4;
+                const fatKcal = totals.fat * 9;
+                totals.carbs = (totals.kcal - proteinKcal - fatKcal) / 4;
+
+                const finalMeals = planOfTheDay.map(meal => {
+                    const mealProteinKcal = (meal.protein || 0) * 4;
+                    const mealFatKcal = (meal.fat || 0) * 9;
+                    const mealCarbKcal = (meal.kcal || 0) - mealProteinKcal - mealFatKcal;
+                    return {...meal, carbs: mealCarbKcal > 0 ? mealCarbKcal / 4 : 0};
+                });
+
+                generatedPlans.push({ day: i, meals: finalMeals, totals: totals });
+            }
+            mealPlanData = generatedPlans;
+        }
+        
+        function populateDaySelector() {
+            if (!daySelector) return;
+            daySelector.innerHTML = '';
+            for (let i = 1; i <= 28; i++) {
+                const option = document.createElement('option');
+                option.value = i;
+                option.textContent = `Ziua ${i}`;
+                daySelector.appendChild(option);
+            }
+        }
+
+        function showDay(dayNumber) {
+            if (!mealPlanDisplay) return;
+            const dayData = mealPlanData.find(d => d && d.day == dayNumber);
+            if (!dayData) {
+                mealPlanDisplay.innerHTML = `<div class="card text-center text-red-500">Planul pentru ziua ${dayNumber} nu a putut fi generat. Vă rugăm reîncărcați pagina.</div>`;
+                return;
+            }
+            mealPlanDisplay.innerHTML = `
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru ziua ${dayData.day}</h3>
+                    <div class="space-y-4">
+                        ${dayData.meals.map(meal => `
+                            <div class="meal-card meal-card-${meal.type}">
+                                <div class="flex items-center gap-4">
+                                    <span class="text-3xl">${meal.icon}</span>
+                                    <div>
+                                        <h4 class="font-bold text-lg text-gray-700">${meal.name}</h4>
+                                        <p class="text-gray-600">${meal.food}</p>
+                                    </div>
+                                </div>
+                                <div class="grid grid-cols-2 md:grid-cols-5 gap-2 text-center text-sm mt-2 pt-2 border-t border-gray-300/50">
+                                    <div><span class="font-semibold block">${(meal.kcal || 0).toFixed(0)}</span><span class="text-xs text-gray-500">Kcal</span></div>
+                                    <div><span class="font-semibold block">${(meal.protein || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Proteine</span></div>
+                                    <div><span class="font-semibold block">${(meal.carbs || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Carbo.</span></div>
+                                    <div><span class="font-semibold block">${(meal.fat || 0).toFixed(1)} g</span><span class="text-xs text-gray-500">Grăsimi</span></div>
+                                    <div><b class="font-semibold block">${(meal.fiber || 0).toFixed(1)} g</b><span class="text-xs text-gray-500">Fibre</span></div>
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                    <div class="mt-6 p-4 bg-indigo-50 rounded-lg">
+                        <h4 class="font-bold text-lg text-center text-indigo-800 mb-2">Sumar nutrițional - ziua ${dayData.day}</h4>
+                        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 text-center">
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.kcal || 0).toFixed(0)}</b><span class="text-sm text-gray-600">Total Kcal</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.protein || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Proteine</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.carbs || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Carbo.</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fat || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Grăsimi</span></div>
+                            <div><b class="text-xl text-indigo-700 block">${(dayData.totals.fiber || 0).toFixed(0)} g</b><span class="text-sm text-gray-600">Total Fibre</span></div>
+                        </div>
+                    </div>
+                </div>`;
+        }
+        
+        function showWeek(weekNumber) {
+            if (!weeklyPlanDisplay) return;
+            const startDay = (weekNumber - 1) * 7 + 1;
+            const endDay = weekNumber * 7;
+            const weekData = mealPlanData.slice(startDay - 1, endDay);
+            
+            weeklyPlanDisplay.innerHTML = `
+                <div class="card">
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center">Plan pentru Săptămâna ${weekNumber} (Zilele ${startDay}-${endDay})</h3>
+                    <div class="space-y-6">
+                        ${weekData.map((dayData, index) => {
+                            if (!dayData) return `<div><h4 class="text-xl font-semibold text-red-700 mb-2 border-b pb-1">Ziua ${startDay + index}</h4><p>Nu s-a putut genera un plan valid pentru această zi.</p></div>`;
+                            return `
+                            <div>
+                                <h4 class="text-xl font-semibold text-indigo-700 mb-2 border-b pb-1">Ziua ${dayData.day}</h4>
+                                <ul class="list-disc list-inside space-y-1 text-gray-600">
+                                    ${dayData.meals.map(meal => `<li><b>${meal.name}:</b> ${meal.food}</li>`).join('')}
+                                </ul>
+                                <div class="mt-2 text-right text-sm font-semibold text-gray-800">Total: ~${dayData.totals.kcal.toFixed(0)} kcal</div>
+                            </div>
+                        `}).join('')}
+                    </div>
+                </div>`;
+        }
+
+        function populateFullTable() {
+            if (!fullPlanTableBody) return;
+            fullPlanTableBody.innerHTML = '';
+            mealPlanData.forEach(dayData => {
+                if(!dayData) return;
+                dayData.meals.forEach((meal, index) => {
+                    const row = document.createElement('tr');
+                    row.className = 'meal-row';
+                    row.innerHTML = `
+                        ${index === 0 ? `<td rowspan="5"><b>${dayData.day}</b></td>` : ''}
+                        <td>${meal.name}</td>
+                        <td>${meal.food}</td>
+                        <td>${(meal.kcal || 0).toFixed(0)}</td>
+                        <td>${(meal.protein || 0).toFixed(1)}</td>
+                        <td>${(meal.carbs || 0).toFixed(1)}</td>
+                        <td>${(meal.fat || 0).toFixed(1)}</td>
+                        <td>${(meal.fiber || 0).toFixed(1)}</td>
+                    `;
+                    fullPlanTableBody.appendChild(row);
+                });
+                const totalRow = document.createElement('tr');
+                totalRow.className = 'total-row';
+                totalRow.innerHTML = `
+                    <td colspan="2">TOTAL ZI ${dayData.day}</td>
+                    <td>${(dayData.totals.kcal || 0).toFixed(0)}</td>
+                    <td>${(dayData.totals.protein || 0).toFixed(1)}</td>
+                    <td>${(dayData.totals.carbs || 0).toFixed(1)}</td>
+                    <td>${(dayData.totals.fat || 0).toFixed(1)}</td>
+                    <td>${(dayData.totals.fiber || 0).toFixed(1)}</td>
+                `;
+                fullPlanTableBody.appendChild(totalRow);
+            });
+        }
+
+        function createAccordion(container, data) {
+            if (!container) return;
+            container.innerHTML = data.map((item) => `
+                <div class="accordion-item">
+                    <h2>
+                        <button type="button" class="accordion-button" aria-expanded="false">
+                            <span class="flex items-center gap-4">
+                                <span class="text-2xl">${item.icon || ''}</span>
+                                <span>${item.title}</span>
+                            </span>
+                            <span class="accordion-icon text-2xl font-light text-indigo-500">+</span>
+                        </button>
+                    </h2>
+                    <div class="accordion-content">
+                        <div class="prose max-w-none">${item.content}</div>
+                    </div>
+                </div>
+            `).join('');
+
+            container.querySelectorAll('.accordion-button').forEach(button => {
+                button.addEventListener('click', () => {
+                    const content = button.parentElement.nextElementSibling;
+                    const isExpanded = button.getAttribute('aria-expanded') === 'true';
+
+                    container.querySelectorAll('.accordion-button').forEach(btn => {
+                        if (btn !== button) {
+                            btn.classList.remove('open');
+                            btn.setAttribute('aria-expanded', 'false');
+                            const otherContent = btn.parentElement.nextElementSibling;
+                            otherContent.classList.remove('open');
+                            otherContent.style.maxHeight = null;
+                        }
+                    });
+
+                    button.classList.toggle('open');
+                    button.setAttribute('aria-expanded', String(!isExpanded));
+                    content.classList.toggle('open');
+                    content.style.maxHeight = content.classList.contains('open') ? content.scrollHeight + "px" : null;
+                });
+            });
+        }
+        
+        generateMealPlan();
+        populateDaySelector();
+        populateFullTable();
+        createAccordion(wellnessAccordion, wellnessData);
+        createAccordion(ingrasareAccordion, ingrasareData);
+        
+        if (daySelector) {
+            daySelector.addEventListener('change', (e) => showDay(e.target.value));
+        }
+        if (weekSelector) {
+            weekSelector.addEventListener('change', (e) => showWeek(e.target.value));
+        }
+        
+        handleTabSwitch({ button: mainContainer.querySelector('.tab-button[data-tab="introducere"]'), buttonSelector: '.tab-button', contentSelector: '.tab-content', container: mainContainer });
+        if (planMeseContainer) {
+            handleTabSwitch({ button: planMeseContainer.querySelector('.sub-tab-button[data-tab="dailyPlanView"]'), buttonSelector: '.sub-tab-button', contentSelector: '.sub-tab-content', container: planMeseContainer });
+        }
+        
+        showDay(1);
+        showWeek(1);
+    });
+</script>
+
+</body>
+</html>
