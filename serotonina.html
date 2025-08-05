@@ -12,7 +12,7 @@
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 10px 10px;
+            padding: 10px 0;
             background-color: #ffffff;
             color: #475569;
         }
@@ -20,6 +20,7 @@
         .container {
             max-width: 1200px;
             margin: 10px auto;
+            padding: 0 25px;
         }
 
         /* --- Titluri --- */
@@ -36,7 +37,7 @@
             font-weight: 600;
             color: #0A2463;
             margin-bottom: 0.75rem;
-            margin-top: 1rem;
+            margin-top: 0;
         }
         
         /* --- Conținut Text --- */
@@ -54,14 +55,14 @@
         .card-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+            gap: 15px;
         }
 
         /* --- Stil pentru Carduri --- */
         .card {
             border-radius: 1rem;
             box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-            padding: 1rem;
+            padding: 1.5rem; /* MODIFICARE CHEIE: Spațiu interior adăugat */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             border: 1px solid #e0e0e0;
             background-color: #ffffff;
@@ -162,7 +163,7 @@
                         Dacă dopamina este <strong>motorul</strong> care ne împinge spre acțiune, <strong>serotonina este uleiul care asigură funcționarea lină a întregului sistem.</strong> Cunoscută chimic sub numele de 5-hidroxitriptamină (5-HT), serotonina este un neurotransmițător monoaminic, la fel ca dopamina, dar cu funcții profund diferite. Ea este sintetizată printr-un proces biochimic în doi pași din triptofan, un aminoacid esențial pe care corpul nostru nu îl poate produce și trebuie să îl obțină din alimentație. Enzima triptofan hidroxilază transformă triptofanul în 5-HTP, care este apoi convertit în serotonină. Acest proces complex depinde critic de prezența co-factorilor, precum vitamina B6 și magneziul, subliniind legătura directă dintre nutriție și starea de spirit.
                     </p>
                     <div style="text-align: center;">
-                        <img src="serotonina_ulei.jpg" alt="ulei serotonina" style="width: 50%; height: auto; margin: 2px 0;">
+                        <img src="serotonina_ulei.jpg" alt="ulei serotonina" style="width: 75%; height: auto; margin: 10px 0;">
                     </div>    
                     <p>
                         O particularitate fiziologică fascinantă este distribuția sa în corp. Deși o asociem cu creierul, peste 90% din serotonina totală este produsă și stocată în celulele enterocromafine din peretele tractului gastrointestinal. Aici, în "al doilea creier", serotonina joacă un rol vital în reglarea motilității intestinale (peristaltism), a secrețiilor și a senzației de greață. Această producție masivă din intestin nu poate însă influența direct creierul, deoarece serotonina nu poate traversa bariera hemato-encefalică. Prin urmare, creierul trebuie să își sintetizeze propria rezervă de serotonină, folosind triptofanul care reușește să treacă această barieră. Această separare funcțională explică de ce problemele digestive sunt atât de frecvent asociate cu tulburările de dispoziție.
@@ -171,7 +172,7 @@
                         În sistemul nervos central, serotonina acționează ca un maestru dirijor, modulând activitatea altor neurotransmițători și influențând o gamă largă de funcții. Ea este implicată în reglarea anxietății, a fericirii, a memoriei, a somnului (fiind un precursor direct al melatoninei), a apetitului și chiar a temperaturii corpului. Diversitatea sa de acțiuni este posibilă datorită existenței a cel puțin 14 tipuri diferite de receptori de serotonină (ex: 5-HT1A, 5-HT2A etc.), fiecare având o distribuție și o funcție specifică în creier. Activarea unui tip de receptor poate promova calmul, în timp ce activarea altuia poate influența apetitul. Această complexitate explică de ce echilibrarea serotoninei este atât de importantă pentru o stare generală de bine.
                     </p>
                     <div style="text-align: center;">
-                        <img src="serotonina_dirijor.jpg" alt="dirijor serotonina" style="width: 50%; height: auto; margin: 2px 0;">
+                        <img src="serotonina_dirijor.jpg" alt="dirijor serotonina" style="width: 75%; height: auto; margin: 10px 0;">
                     </div>
                     <p>
                         Deficitul de serotonină, cunoscut și ca sindromul deficienței de serotonină, nu înseamnă neapărat o cantitate totală redusă în corp, ci mai degrabă o problemă la nivelul transmiterii semnalului în creier. Acest lucru se poate datora mai multor factori: o producție insuficientă de triptofan, un număr redus de receptori de serotonină, incapacitatea receptorilor de a prelua eficient neurotransmițătorul sau o recaptare prea rapidă a serotoninei înainte ca aceasta să își poată îndeplini funcția. Stilul de viață modern, cu stresul său cronic, dieta săracă în nutrienți esențiali și expunerea redusă la lumina naturală, contribuie direct la epuizarea acestui sistem delicat, lăsându-ne vulnerabili în fața dezechilibrelor.
@@ -185,7 +186,7 @@
                 </div>
 
                 <!-- Pasul 1 -->
-                <div class="step-card bg-color-1">
+                <div class="card step-card bg-color-1">
                     <div>
                         <h2>Pasul 1: Caută lumina soarelui</h2>
                         <img src="pasul_1_serotonina.jpg" alt="Pasul 1">
@@ -199,7 +200,7 @@
                 </div>
 
                 <!-- Pasul 2 -->
-                <div class="step-card bg-color-2">
+                <div class="card step-card bg-color-2">
                     <div>
                         <h2>Pasul 2: Adoptă mișcarea ritmică</h2>
                         <img src="pasul_2_serotonina.jpg" alt="Pasul 2">
@@ -213,7 +214,7 @@
                 </div>
 
                 <!-- Pasul 3 -->
-                <div class="step-card bg-color-3">
+                <div class="card step-card bg-color-3">
                     <div>
                         <h2>Pasul 3: Hrănește-te cu triptofan</h2>
                         <img src="pasul_3_serotonina.jpg" alt="Pasul 3">
@@ -227,7 +228,7 @@
                 </div>
 
                 <!-- Pasul 4 -->
-                <div class="step-card bg-color-4">
+                <div class="card step-card bg-color-4">
                     <div>
                         <h2>Pasul 4: Ai grijă de "al doilea creier"</h2>
                         <img src="pasul_4_serotonina.jpg" alt="Pasul 4">
@@ -241,7 +242,7 @@
                 </div>
 
                 <!-- Pasul 5 -->
-                <div class="step-card bg-color-5">
+                <div class="card step-card bg-color-5">
                     <div>
                         <h2>Pasul 5: Practică recunoștința</h2>
                         <img src="pasul_5_serotonina.jpg" alt="Pasul 5">
@@ -255,7 +256,7 @@
                 </div>
 
                 <!-- Pasul 6 -->
-                <div class="step-card bg-color-6">
+                <div class="card step-card bg-color-6">
                     <div>
                         <h2>Pasul 6: Prioritizează atingerea fizică</h2>
                         <img src="pasul_6_serotonina.jpg" alt="Pasul 6">
@@ -269,10 +270,10 @@
                 </div>
 
                 <!-- Pasul 7 -->
-                <div class="step-card bg-color-7">
+                <div class="card step-card bg-color-7">
                     <div>
                         <h2>Pasul 7: Gestionează stresul cronic</h2>
-                        <img src="pasul_7_serotonina.jpg" alt="Pasul 7">
+                        <img src="pasul_7_serotonina.png" alt="Pasul 7">
                         <p>
                             Cortizolul și serotonina au o relație inversă. Când nivelul de stres cronic este ridicat, cortizolul crește, iar acest lucru poate epuiza rezervele de serotonină și precursorii săi. Implementarea unor tehnici regulate de management al stresului este esențială. Meditația, exercițiile de respirație profundă (precum respirația în cutie - 4 secunde inspiri, 4 ții, 4 expiri, 4 pauză) sau yoga pot calma sistemul nervos și pot proteja nivelurile prețioase de serotonină. Aceste practici activează sistemul nervos parasimpatic ("odihnă și digestie"), care contracarează răspunsul de "luptă sau fugă". Chiar și 5-10 minute pe zi pot reduce semnificativ impactul negativ al stresului asupra chimiei creierului, permițând resurselor tale interne să fie folosite pentru regenerare, nu doar pentru supraviețuire.
                         </p>
@@ -283,7 +284,7 @@
                 </div>
 
                 <!-- Pasul 8 -->
-                <div class="step-card bg-color-8">
+                <div class="card step-card bg-color-8">
                     <div>
                         <h2>Pasul 8: Respectă-ți ciclul de somn</h2>
                         <img src="pasul_8_serotonina.jpg" alt="Pasul 8">
@@ -304,10 +305,7 @@
 
     </div>
 
-</body>
-</html>
-
-<script>
+    <script>
      // Script de securitate pentru a bloca copierea și uneltele de dezvoltator
         document.addEventListener('contextmenu', event => event.preventDefault()); // Blochează clicul dreapta
 
@@ -332,6 +330,8 @@
             if (e.ctrlKey && e.shiftKey && e.key === 'J') {
                 e.preventDefault();
             }
-        });
-  
-</script>
+        }); 
+    </script>
+    
+</body>
+</html>
