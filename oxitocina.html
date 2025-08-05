@@ -7,12 +7,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
+     <style>
         /* --- Stil General --- */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
-            padding: 10px 10px;
+            padding: 10px 0;
             background-color: #ffffff;
             color: #475569;
         }
@@ -20,6 +20,7 @@
         .container {
             max-width: 1200px;
             margin: 10px auto;
+            padding: 0 25px;
         }
 
         /* --- Titluri --- */
@@ -36,7 +37,7 @@
             font-weight: 600;
             color: #0A2463;
             margin-bottom: 0.75rem;
-            margin-top: 1rem;
+            margin-top: 0;
         }
         
         /* --- Conținut Text --- */
@@ -54,14 +55,14 @@
         .card-container {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 25px;
+            gap: 15px;
         }
 
         /* --- Stil pentru Carduri --- */
         .card {
             border-radius: 1rem;
             box-shadow: 0 4px 4px rgba(0, 0, 0, 0.05);
-            padding: 1rem;
+            padding: 1.5rem; /* MODIFICARE CHEIE: Spațiu interior adăugat */
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             border: 1px solid #e0e0e0;
             background-color: #ffffff;
@@ -97,8 +98,8 @@
         }
 
         .special-intro-card {
-            background-color: #fdf2f8; /* Un roz pal pentru oxitocină */
-            color: #831843; /* Un roz închis pentru text */
+            background-color: #eef2ff; /* Albastru pal, ca la dopamină */
+            color: #0A2463;
             font-weight: bold;
             font-style: italic;
             text-align: center;
@@ -108,7 +109,7 @@
             font-size: 1.1em;
         }
 
-        /* --- Culori de fundal pale pentru carduri --- */
+        /* --- Culori de fundal pale pentru carduri (ca la dopamină) --- */
         .bg-color-1 { background-color: #fef2f2; }
         .bg-color-2 { background-color: #fff7ed; }
         .bg-color-3 { background-color: #fefce8; }
