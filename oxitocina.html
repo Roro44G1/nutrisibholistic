@@ -3,18 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ghid pentru echilibrarea oxitocinei</title>
+    <title>Ghid pentru Echilibrarea Oxitocinei</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
     <style>
-        /* --- Stil General inspirat de exemplul oferit --- */
+        /* --- Stil General --- */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 10px 0;
-            background-color: #ffffff; /* Fundal alb */
-            color: #475569; /* Gri-albăstrui pentru textul principal */
+            background-color: #ffffff;
+            color: #475569;
         }
 
         .container {
@@ -25,7 +25,7 @@
 
         /* --- Titluri --- */
         h1 {
-            color: #0A2463; /* Albastru închis */
+            color: #0A2463;
             text-align: center;
             margin-bottom: 1rem;
             font-size: 2em;
@@ -54,7 +54,7 @@
         /* --- Container pentru Carduri --- */
         .card-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr); /* Forțează 2 coloane */
+            grid-template-columns: repeat(2, 1fr);
             gap: 15px;
         }
 
@@ -81,7 +81,7 @@
         }
 
         .step-card p {
-            flex-grow: 1; /* Permite paragrafului să ocupe spațiul disponibil */
+            flex-grow: 1;
         }
         
         .step-card img {
@@ -94,30 +94,30 @@
 
         /* --- Carduri Speciale (Intro) --- */
         .full-width-card {
-            grid-column: 1 / -1; /* Face cardul să ocupe toată lățimea grilei */
+            grid-column: 1 / -1;
         }
 
         .special-intro-card {
-            background-color: #eef2ff; /* Fundal albastru pal */
-            color: #0A2463;
+            background-color: #fdf2f8; /* Un roz pal pentru oxitocină */
+            color: #831843; /* Un roz închis pentru text */
             font-weight: bold;
             font-style: italic;
             text-align: center;
         }
         .special-intro-card p {
             text-align: center;
-            font-size: 1.1em; /* Mărime normală de font */
+            font-size: 1.1em;
         }
 
         /* --- Culori de fundal pale pentru carduri --- */
-        .bg-color-1 { background-color: #fef2f2; } /* Roșu pal */
-        .bg-color-2 { background-color: #fff7ed; } /* Portocaliu pal */
-        .bg-color-3 { background-color: #fefce8; } /* Galben pal */
-        .bg-color-4 { background-color: #f0fdf4; } /* Verde pal */
-        .bg-color-5 { background-color: #ecfeff; } /* Cyan pal */
-        .bg-color-6 { background-color: #f5f3ff; } /* Mov pal */
-        .bg-color-7 { background-color: #fdf2f8; } /* Roz pal */
-        .bg-color-8 { background-color: #fafafa; } /* Gri foarte pal */
+        .bg-color-1 { background-color: #fef2f2; }
+        .bg-color-2 { background-color: #fff7ed; }
+        .bg-color-3 { background-color: #fefce8; }
+        .bg-color-4 { background-color: #f0fdf4; }
+        .bg-color-5 { background-color: #ecfeff; }
+        .bg-color-6 { background-color: #f5f3ff; }
+        .bg-color-7 { background-color: #fdf2f8; }
+        .bg-color-8 { background-color: #fafafa; }
 
         /* --- Footer --- */
         footer {
@@ -136,7 +136,7 @@
         /* --- Responsive pentru ecrane mici --- */
         @media (max-width: 768px) {
             .card-container {
-                grid-template-columns: 1fr; /* O singură coloană pe mobil */
+                grid-template-columns: 1fr;
             }
         }
     </style>
@@ -186,7 +186,7 @@
                 </div>
 
                 <!-- Pasul 1 -->
-                <div class="step-card bg-color-1">
+                <div class="card step-card bg-color-1">
                     <div>
                         <h2>Pasul 1: Îmbrățișări de calitate</h2>
                         <img src="pasul_1_oxitocina.jpg" alt="Pasul 1">
@@ -200,7 +200,7 @@
                 </div>
 
                 <!-- Pasul 2 -->
-                <div class="step-card bg-color-2">
+                <div class="card step-card bg-color-2">
                     <div>
                         <h2>Pasul 2: Contact vizual conștient</h2>
                         <img src="pasul_2_oxitocina.jpg" alt="Pasul 2">
@@ -214,7 +214,7 @@
                 </div>
 
                 <!-- Pasul 3 -->
-                <div class="step-card bg-color-3">
+                <div class="card step-card bg-color-3">
                     <div>
                         <h2>Pasul 3: Acte de bunătate și generozitate</h2>
                         <img src="pasul_3_oxitocina.jpg" alt="Pasul 3">
@@ -228,7 +228,7 @@
                 </div>
 
                 <!-- Pasul 4 -->
-                <div class="step-card bg-color-4">
+                <div class="card step-card bg-color-4">
                     <div>
                         <h2>Pasul 4: Ascultare activă și empatică</h2>
                         <img src="pasul_4_oxitocina.jpg" alt="Pasul 4">
@@ -242,7 +242,7 @@
                 </div>
 
                 <!-- Pasul 5 -->
-                <div class="step-card bg-color-5">
+                <div class="card step-card bg-color-5">
                     <div>
                         <h2>Pasul 5: Interacțiunea cu animale de companie</h2>
                         <img src="pasul_5_oxitocina.jpg" alt="Pasul 5">
@@ -256,7 +256,7 @@
                 </div>
 
                 <!-- Pasul 6 -->
-                <div class="step-card bg-color-6">
+                <div class="card step-card bg-color-6">
                     <div>
                         <h2>Pasul 6: Masaj și atingere caldă</h2>
                         <img src="pasul_6_oxitocina.jpg" alt="Pasul 6">
@@ -270,7 +270,7 @@
                 </div>
 
                 <!-- Pasul 7 -->
-                <div class="step-card bg-color-7">
+                <div class="card step-card bg-color-7">
                     <div>
                         <h2>Pasul 7: Experiențe comune și ritualuri</h2>
                         <img src="pasul_7_oxitocina.jpg" alt="Pasul 7">
@@ -284,7 +284,7 @@
                 </div>
 
                 <!-- Pasul 8 -->
-                <div class="step-card bg-color-8">
+                <div class="card step-card bg-color-8">
                     <div>
                         <h2>Pasul 8: Meditația iubirii-bunătății (Metta)</h2>
                         <img src="pasul_8_oxitocina.jpg" alt="Pasul 8">
@@ -305,7 +305,7 @@
 
     </div>
 
-<script>
+    <script>
      // Script de securitate pentru a bloca copierea și uneltele de dezvoltator
         document.addEventListener('contextmenu', event => event.preventDefault()); // Blochează clicul dreapta
 
@@ -331,7 +331,7 @@
                 e.preventDefault();
             }
         });
-  
 </script>
+    
 </body>
 </html>
