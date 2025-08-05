@@ -7,14 +7,14 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-     <style>
-        /* --- Stil General --- */
+    <style>
+        /* --- Stil General inspirat de exemplul oferit --- */
         body {
             font-family: 'Inter', sans-serif;
             margin: 0;
             padding: 10px 0;
-            background-color: #ffffff;
-            color: #475569;
+            background-color: #ffffff; /* Fundal alb */
+            color: #475569; /* Gri-albăstrui pentru textul principal */
         }
 
         .container {
@@ -25,7 +25,7 @@
 
         /* --- Titluri --- */
         h1 {
-            color: #0A2463;
+            color: #0A2463; /* Albastru închis */
             text-align: center;
             margin-bottom: 1rem;
             font-size: 2em;
@@ -54,7 +54,7 @@
         /* --- Container pentru Carduri --- */
         .card-container {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: repeat(2, 1fr); /* Forțează 2 coloane */
             gap: 15px;
         }
 
@@ -81,7 +81,7 @@
         }
 
         .step-card p {
-            flex-grow: 1;
+            flex-grow: 1; /* Permite paragrafului să ocupe spațiul disponibil */
         }
         
         .step-card img {
@@ -94,11 +94,11 @@
 
         /* --- Carduri Speciale (Intro) --- */
         .full-width-card {
-            grid-column: 1 / -1;
+            grid-column: 1 / -1; /* Face cardul să ocupe toată lățimea grilei */
         }
 
         .special-intro-card {
-            background-color: #eef2ff; /* Albastru pal, ca la dopamină */
+            background-color: #eef2ff; /* Fundal albastru pal */
             color: #0A2463;
             font-weight: bold;
             font-style: italic;
@@ -106,18 +106,18 @@
         }
         .special-intro-card p {
             text-align: center;
-            font-size: 1.1em;
+            font-size: 1.1em; /* Mărime normală de font */
         }
 
-        /* --- Culori de fundal pale pentru carduri (ca la dopamină) --- */
-        .bg-color-1 { background-color: #fef2f2; }
-        .bg-color-2 { background-color: #fff7ed; }
-        .bg-color-3 { background-color: #fefce8; }
-        .bg-color-4 { background-color: #f0fdf4; }
-        .bg-color-5 { background-color: #ecfeff; }
-        .bg-color-6 { background-color: #f5f3ff; }
-        .bg-color-7 { background-color: #fdf2f8; }
-        .bg-color-8 { background-color: #fafafa; }
+        /* --- Culori de fundal pale pentru carduri --- */
+        .bg-color-1 { background-color: #fef2f2; } /* Roșu pal */
+        .bg-color-2 { background-color: #fff7ed; } /* Portocaliu pal */
+        .bg-color-3 { background-color: #fefce8; } /* Galben pal */
+        .bg-color-4 { background-color: #f0fdf4; } /* Verde pal */
+        .bg-color-5 { background-color: #ecfeff; } /* Cyan pal */
+        .bg-color-6 { background-color: #f5f3ff; } /* Mov pal */
+        .bg-color-7 { background-color: #fdf2f8; } /* Roz pal */
+        .bg-color-8 { background-color: #fafafa; } /* Gri foarte pal */
 
         /* --- Footer --- */
         footer {
@@ -136,7 +136,7 @@
         /* --- Responsive pentru ecrane mici --- */
         @media (max-width: 768px) {
             .card-container {
-                grid-template-columns: 1fr;
+                grid-template-columns: 1fr; /* O singură coloană pe mobil */
             }
         }
     </style>
