@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Ghid complet al aminoacizilor și proteinelor</title>
     
-    <!-- Stilurile CSS + JavaScript pentru funcționalitatea tab-urilor -->
     <style>
         /* Se asigură că fontul Inter este încărcat */
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
@@ -103,6 +102,7 @@
         }
 
         .tab-content {
+            display: none; /* Ascunde tab-urile by default */
             padding: 30px 40px;
             animation: fadeIn 0.5s;
         }
@@ -214,6 +214,53 @@
             text-decoration: underline;
         }
 
+        /* Stiluri pentru carduri și butoane în secțiunea Suplimente */
+        .zwp-card-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 25px;
+        }
+        
+        .zwp-card-grid.three-cols {
+             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        }
+
+        .zwp-topic-card {
+            border-radius: 1rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            padding: 1.5rem 2rem;
+            border: 1px solid var(--border-color);
+            display: flex;
+            flex-direction: column;
+        }
+        .zwp-topic-card.bg-pale-blue { background-color: var(--card-pale-blue); }
+        .zwp-topic-card.bg-pale-green { background-color: var(--card-pale-green); }
+        .zwp-topic-card.bg-pale-yellow { background-color: var(--card-pale-yellow); }
+        .zwp-topic-card.bg-pale-red { background-color: var(--card-pale-red); }
+        .zwp-topic-card.bg-pale-grey { background-color: var(--card-pale-grey); }
+        
+        .zwp-button {
+            display: inline-block;
+            padding: 12px 24px;
+            margin-top: auto;
+            border-radius: 8px;
+            text-decoration: none;
+            color: white !important;
+            font-weight: 600;
+            text-align: center;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: none;
+            cursor: pointer;
+        }
+        .zwp-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+        .btn-herbalife { background-color: #7DBA00; }
+        .btn-fitline { background-color: #ED1C24; }
+        .btn-coralclub { background-color: #00AEEF; }
+        .btn-servicii { background-color: #52595D; }
+
         .ztabs-footer {
             text-align: center;
             padding: 25px 0;
@@ -233,12 +280,13 @@
 
         <!-- Butoanele pentru tab-uri -->
         <div class="tab-buttons">
-            <button class="tab-link" onclick="openTab(event, 'fundamente')">Fundamente</button>
-            <button class="tab-link" onclick="openTab(event, 'harta')">Harta aminoacizilor</button>
-            <button class="tab-link" onclick="openTab(event, 'bcaa')">BCAA</button>
-            <button class="tab-link" onclick="openTab(event, 'aport')">Aport proteic</button>
-            <button class="tab-link" onclick="openTab(event, 'suplimentare')">Suplimentare</button>
-            <button class="tab-link" onclick="openTab(event, 'bibliografie')">Bibliografie</button>
+            <button class="tab-link" onclick="openTab(event, 'fundamente')">1. Fundamente</button>
+            <button class="tab-link" onclick="openTab(event, 'harta')">2. Harta Aminoacizilor</button>
+            <button class="tab-link" onclick="openTab(event, 'bcaa')">3. BCAA</button>
+            <button class="tab-link" onclick="openTab(event, 'aport')">4. Aport Proteic</button>
+            <button class="tab-link" onclick="openTab(event, 'suplimentare')">5. Suplimentare Inteligentă</button>
+            <button class="tab-link" onclick="openTab(event, 'suplimente')">6. Suplimente Recomandate</button>
+            <button class="tab-link" onclick="openTab(event, 'bibliografie')">7. Bibliografie</button>
         </div>
 
         <!-- Conținutul tab-urilor -->
@@ -524,7 +572,7 @@
             <ul>
                 <li><strong>Atingerea unui necesar proteic ridicat:</strong> Pentru sportivii de performanță, culturiști sau chiar amatori serioși, necesarul proteic poate depăși 150-200 de grame pe zi. A consuma o astfel de cantitate exclusiv din surse alimentare precum carnea, ouăle sau lactatele poate fi dificil, costisitor și poate aduce un aport caloric și de grăsimi saturate nedorit.[8, 106] Suplimentele proteice (sub formă de pulbere) oferă o metodă extrem de convenabilă, rapidă și eficientă din punct de vedere caloric pentru a acoperi acest necesar.[91]</li>
                 <li><strong>Viteza de absorbție și "fereastra anabolică":</strong> După un antrenament intens, capacitatea mușchilor de a absorbi nutrienți și de a iniția procesele de reparație este maximizată. Proteinele cu absorbție rapidă, precum izolatul proteic din zer (whey isolate), pot livra aminoacizi în fluxul sanguin într-un interval de timp foarte scurt, kick-startând sinteza proteinelor musculare exact atunci când este cel mai necesar.[91, 106] Deși conceptul unei „ferestre anabolice” stricte de 30-60 de minute a fost nuanțat, importanța unui aport proteic post-antrenament rămâne un principiu valid în nutriția sportivă.[105]</li>
-                <li><strong>Conveniență și stil de viață:</strong> Pentru persoanele cu un program aglomerat, care nu au timp să pregătiască o masă completă, un shake proteic poate reprezenta o gustare sau un înlocuitor de masă rapid și nutritiv.[106]</li>
+                <li><strong>Conveniență și stil de viață:</strong> Pentru persoanele cu un program aglomerat, care nu au timp să pregătească o masă completă, un shake proteic poate reprezenta o gustare sau un înlocuitor de masă rapid și nutritiv.[106]</li>
                 <li><strong>Nevoile populațiilor specifice:</strong> Vegetarienii și veganii, care pot întâmpina dificultăți în a atinge necesarul de EAA, în special de leucină, pot beneficia de suplimente proteice vegetale (din mazăre, orez, soia) pentru a-și asigura un profil complet. De asemenea, persoanele în vârstă, care adesea au un apetit redus și un risc crescut de sarcopenie, pot utiliza suplimentele pentru a-și atinge mai ușor necesarul proteic crescut.[105, 106]</li>
             </ul>
             <h3>5.2 Beneficiile demonstrate ale suplimentelor proteice: dincolo de masa musculară</h3>
@@ -561,8 +609,43 @@
             <p>În concluzie, în timp ce beneficiile unui aport proteic adecvat sunt incontestabile, riscurile asociate cu suplimentele de calitate îndoielnică sunt la fel de reale. Alegerea unui produs testat și certificat, cum ar fi cele de pe Lista Köln, nu este doar o măsură de precauție pentru sportivii de elită, ci un standard de bază pentru oricine își ia în serios sănătatea. A investi într-un supliment testat înseamnă a investi în siguranță, certitudine și, în cele din urmă, în atingerea obiectivelor de sănătate și performanță fără compromisuri periculoase. Această alegere informată și fermă separă o abordare amatoristă de una profesionistă și responsabilă a nutriției.</p>
         </div>
         
+        <div id="suplimente" class="tab-content">
+            <h2>6: Suplimente recomandate</h2>
+            <div class="zwp-card-grid">
+                <div class="zwp-topic-card bg-pale-grey">
+                    <h3>Suplimentăm...</h3>
+                    <p>În peisajul nutrițional modern, suplimentele alimentare au depășit de mult statutul de 'moft' sau opțiune exclusivă pentru sportivi, devenind o componentă esențială a unei diete echilibrate și a unui stil de viață proactiv.</p>
+                    <p>Această schimbare de paradigmă este determinată de o realitate incontestabilă: calitatea nutritivă a alimentelor a scăzut. Agricultura intensivă, procesarea alimentelor și epuizarea solului au dus la o diminuare a conținutului de vitamine și minerale esențiale. </p>
+                    <p>Astfel, apare o discrepanță tot mai mare între micronutrienții furnizați de o dietă considerată 'sănătoasă' și necesarul real al organismului pentru a funcționa la capacitate optimă. Suplimentarea inteligentă devine astfel o strategie necesară pentru a acoperi acest deficit nutrițional, asigurând corpului 'cărămizile' vitale pentru energie, regenerare și protecție.</p>
+                </div>
+            </div>
+            <div class="zwp-topic-card bg-pale-grey" style="margin-top: 25px;">
+                    <h3>Măsurăm...</h3>
+                    <p>Dacă ești interesat de a stabili dozarea corectă a suplimentelor conform cerințelor tale nutriționale și metabolice, alege o întâlnire de evaluare cu mine în care vom măsura și identifica exact nevoile organismului tău. Nu mai consuma suplimente după ce spun unii sau alții! Riști să arunci la toaletă o mare parte din ce înghiți și nu asimilezi!</p>
+                    <p>Programează-te acum la o întâlnire fizică sau on-line în care să evaluăm împreună stilul tău de alimentație, obiceiurile tale și să analizăm științific necesarul de macro și micronutrienți!</p>
+                    <p style="text-align: center; margin-top: 1rem;"><a href="https://tinyurl.com/ProgramareServicii" target="_blank" class="zwp-button btn-servicii">Programare întâlnire</a></p>
+            </div>
+            <div class="zwp-card-grid three-cols" style="margin-top: 25px;">
+                <div class="zwp-topic-card bg-pale-green">
+                    <h3>Herbalife</h3>
+                    <p>Herbalife este o companie globală de nutriție, renumită pentru shake-urile sale proteice Formula 1, care servesc ca înlocuitori de masă echilibrați. Abordarea sa se concentrează pe un stil de viață activ și sănătos, oferind programe personalizate pentru managementul greutății, nutriție sportivă și vitalitate generală. Produsele sunt concepute pentru a asigura un aport optim de macro și micronutrienți, susținând obiectivele de fitness și starea de bine. Prin rețeaua sa de distribuitori independenți, Herbalife promovează o comunitate de sprijin care încurajează adoptarea unor obiceiuri alimentare sănătoase pe termen lung.</p>
+                    <a href="https://tinyurl.com/HerbalifePartner" target="_blank" class="zwp-button btn-herbalife">Descoperă Herbalife</a>
+                </div>
+                <div class="zwp-topic-card bg-pale-red">
+                    <h3>FitLine</h3>
+                    <p>FitLine, o marcă germană de top, se distinge prin conceptul său unic și patentat de transport al nutrienților (NTC®), care asigură o biodisponibilitate maximă a ingredientelor active direct la nivel celular. Produsele sunt dezvoltate conform celor mai înalte standarde de calitate (certificare TÜV SÜD) și se concentrează pe optimizarea energiei, performanței și regenerării. Gama FitLine este populară în rândul sportivilor de performanță și al persoanelor care caută soluții premium pentru a-și susține sistemul imunitar, sănătatea cardiovasculară și a reduce efectele stresului oxidativ, promovând vitalitatea din interior spre exterior.</p>
+                    <a href="http://tinyurl.com/FitLinePartner" target="_blank" class="zwp-button btn-fitline">Descoperă FitLine</a>
+                </div>
+                <div class="zwp-topic-card bg-pale-blue">
+                    <h3>CoralClub</h3>
+                    <p>CoralClub promovează o filozofie holistică a sănătății, bazată pe patru piloni: hidratare, curățare, nutriție și protecție. Punctul de plecare este optimizarea calității apei de băut cu ajutorul produsului emblematic, Coral-Mine, care îmbogățește apa cu minerale. Compania oferă programe integrate de detoxifiere și nutriție celulară, menite să restabilească echilibrul natural al organismului. Suplimentele CoralClub sunt concepute pentru a susține un mediu intern sănătos, a elimina toxinele și a furniza celulelor nutrienții necesari pentru funcționare optimă, având o abordare complexă a stării de bine.</p>
+                    <a href="https://tinyurl.com/CoralClubPartner" target="_blank" class="zwp-button btn-coralclub">Descoperă CoralClub</a>
+                </div>
+            </div>
+        </div>
+
         <div id="bibliografie" class="tab-content">
-            <h2>6: Bibliografie</h2>
+            <h2>7: Bibliografie</h2>
             <ol class="bibliography-list">
                 <li>Wu, G. (2009). Amino acids: metabolism, functions, and nutrition. *Amino acids*, 37(1), 1-17.</li>
                 <li>Berg, J. M., Tymoczko, J. L., & Stryer, L. (2002). *Biochemistry* (5th ed.). W. H. Freeman.</li>
