@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analiză FitLine și Interacțiuni Medicale</title>
+    
+    <style>
+        /* Se asigură că fontul Inter este încărcat */
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
+
+        /* Definirea variabilelor de culoare */
+        :root {
+            --dark-blue: #0A2463;
+            --medium-blue: #3E92CC;
+            --light-blue: #eaf2f8;
+            --text-dark: #212529;
+            --text-light: #475569;
+            --bg-light: #f8f9fa;
+            --bg-white: #ffffff;
+            --border-color: #e0e0e0;
+        }
+
+        /* Stilul general al paginii */
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background-color: var(--bg-light);
+            margin: 0;
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
+        }
+
+        /* Containerul principal al articolului */
+        .ztabs-container {
+            max-width: 900px;
+            width: 100%;
+            margin: 0 auto;
+            background: var(--bg-white);
+            border-radius: 15px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            border: 1px solid var(--border-color);
+        }
+
+        .ztabs-header {
+            background: linear-gradient(135deg, var(--dark-blue), var(--medium-blue));
+            color: white;
+            padding: 40px 20px;
+            text-align: center;
+        }
+        
+        .ztabs-header h1 {
+            font-size: 2em;
+            font-weight: 700;
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.2);
+            margin: 0;
+            padding: 0;
+            color: white !important;
+            border: none !important;
+        }
+
+        /* Stiluri pentru sistemul de tab-uri */
+        .tab-buttons {
+            display: flex;
+            flex-wrap: wrap;
+            background-color: #f1f1f1;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .tab-link {
+            background-color: inherit;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: background-color 0.3s, color 0.3s;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: var(--dark-blue);
+            border-bottom: 3px solid transparent;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .tab-link:hover {
+            background-color: #ddd;
+        }
+
+        .tab-link.active {
+            background-color: var(--bg-white);
+            color: var(--dark-blue);
+            border-bottom: 3px solid var(--medium-blue);
+        }
+
+        .tab-content {
+            display: none; /* Ascunde tab-urile by default */
+            padding: 30px 40px;
+            animation: fadeIn 0.5s;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Stiluri pentru conținutul intern */
+        .tab-content h2 {
+            font-size: 1.8em;
+            color: var(--dark-blue);
+            margin-bottom: 25px;
+            font-weight: 700;
+            border-bottom: 3px solid var(--medium-blue);
+            padding-bottom: 10px;
+            text-align: center;
+        }
+
+        .tab-content h3 {
+            font-size: 1.4em;
+            font-weight: 600;
+            color: var(--dark-blue) !important;
+            margin-top: 1.5rem;
+            margin-bottom: 1rem;
+            border-bottom: 2px solid var(--medium-blue);
+            padding-bottom: 0.5rem;
+        }
+
+        .tab-content h4 {
+            font-size: 1.1em;
+            color: var(--medium-blue) !important;
+            font-weight: 600;
+            margin-top: 1.2rem;
+            margin-bottom: 0.5rem;
+            border: none !important;
+            padding: 0 !important;
+        }
+
+        .tab-content p, .tab-content li {
+            font-size: 0.95em;
+            color: var(--text-light);
+            text-align: justify;
+            margin-bottom: 10px;
+        }
+
+        .tab-content ul, .tab-content ol {
+            padding-left: 20px;
+        }
+        
+        .tab-content strong {
+            color: var(--dark-blue);
+            font-weight: 600;
+        }
+
+        .tab-content table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 1.5rem 0;
+            font-size: 0.9em;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+
+        .tab-content th, .tab-content td {
+            padding: 0.75rem;
+            text-align: left;
+            border: 1px solid #d1d9e6;
+            vertical-align: top;
+        }
+
+        .tab-content th {
+            background-color: #e2e8f0;
+            font-weight: 600;
+            color: var(--dark-blue);
+        }
+
+        .tab-content tr:nth-child(even) {
+            background-color: #f8fafc;
+        }
+        
+        .ztabs-footer {
+            text-align: center;
+            padding: 25px 0;
+            font-size: 0.9em;
+            color: #6c757d;
+            border-top: 1px solid var(--border-color);
+            background-color: var(--bg-light);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="ztabs-container">
+        <header class="ztabs-header">
+            <h1>O revizuire farmacologică și toxicologică a suplimentelor FitLine</h1>
+        </header>
+
+        <!-- Butoanele pentru tab-uri -->
+        <div class="tab-buttons">
+            <button class="tab-link" onclick="openTab(event, 'analiza')">Analiza compozițională</button>
+            <button class="tab-link" onclick="openTab(event, 'riscuri-vitaminice')">Riscuri vitaminice</button>
+            <button class="tab-link" onclick="openTab(event, 'riscuri-minerale')">Riscuri minerale</button>
+            <button class="tab-link" onclick="openTab(event, 'riscuri-botanice')">Componente botanice</button>
+            <button class="tab-link" onclick="openTab(event, 'sinteza')">Sinteză și recomandări</button>
+        </div>
+
+        <!-- Conținutul tab-urilor -->
+        <div id="analiza" class="tab-content">
+            <h2>Analiza compozițională a formulărilor cheie FitLine</h2>
+            <p>Această secțiune oferă o detaliere a principalelor produse FitLine, stabilind baza cantitativă pentru analiza de risc ulterioară. Accentul este pus pe identificarea dozelor supraterapeutice și a combinațiilor complexe de ingrediente.</p>
+            
+            <h3>FitLine PowerCocktail: o formulă multi-componentă de vitamine, minerale, extracte botanice și probiotice</h3>
+            <p>FitLine PowerCocktail este un produs complex, conceput ca un supliment matinal „totul-în-unul”, care combină ingrediente din produse anterior separate, precum „Basics” și „Activize Oxyplus”. Analiza compoziției sale relevă o formulă extinsă:</p>
+            <ul>
+                <li><strong>Complex de vitamine și minerale:</strong> Produsul conține un spectru larg de vitamine din complexul B, vitamina C, vitamina E, seleniu și provitamina A (sub formă de beta-caroten).</li>
+                <li><strong>Amestec botanic:</strong> Include un amestec brevetat de extracte din fructe, legume și condimente, printre care se numără extractul de ceai verde, curcuma (turmeric) și ghimbir. Aceste componente au activitate biologică proprie și potențial de interacțiune.</li>
+                <li><strong>Componenta probiotică:</strong> O caracteristică distinctă este includerea culturilor de acid lactic vii (<em>Lactobacillus acidophilus</em>, <em>Lactobacillus reuteri</em>), ceea ce îl clasifică drept un supliment probiotic.</li>
+                <li><strong>Stimulent:</strong> Fiecare porție conține 30 mg de cofeină, derivată din extract de guarana.</li>
+                <li><strong>Baza de excipienți:</strong> Formula are la bază fructoză, diverse tipuri de fibre (ovăz, mazăre, măr, orez) și agenți de îngroșare (gumă arabică, gumă de guar, pectină).</li>
+            </ul>
+
+            <h3>FitLine Restorate: un complex de minerale și micronutrienți pentru regenerare</h3>
+            <p>Comercializat ca un supliment de seară destinat regenerării și echilibrului mineral, FitLine Restorate este formulat pentru a reface rezervele de minerale ale organismului.</p>
+            <ul>
+                <li><strong>Matrice minerală:</strong> Componentele de bază sunt minerale esențiale: calciu (carbonat, lactat), magneziu (carbonat, citrat), potasiu (citrat), zinc (gluconat), fier (citrat), cupru (gluconat), mangan (gluconat), crom (picolinat) și seleniu (selenit de sodiu sau drojdie de seleniu).</li>
+                <li><strong>Vitamina D3:</strong> Produsul este fortificat cu vitamina D3 pentru a facilita absorbția și utilizarea mineralelor, în special a calciului.</li>
+                <li><strong>Proprietăți alcaline:</strong> Formula este concepută pentru a fi alcalină, având ca scop declarat contribuția la echilibrul acido-bazic al organismului. Baza sa conține fructoză și acid citric.</li>
+            </ul>
+
+            <h3>FitLine Activize Oxyplus: un amestec de vitamine B în doze mari și stimulente</h3>
+            <p>Acest produs este special formulat pentru a susține metabolismul energetic, a reduce oboseala și a crește aportul de oxigen la nivel celular. Elementele sale definitorii sunt:</p>
+            <ul>
+                <li><strong>Complex de vitamine B în doze mari:</strong> Nucleul produsului este un complex de vitamine B, incluzând vitamina B1 (tiamină), B2 (riboflavină), B3 (niacină), B5 (acid pantotenic), B6 (piridoxină), B7 (biotină), B9 (acid folic) și B12 (cianocobalamină). Dozele acestor vitamine depășesc adesea de câteva ori doza zilnică recomandată (DZR).</li>
+                <li><strong>Stimulent (cofeină):</strong> Conține cofeină din extract de guarana. Cantitatea de cofeină este declarată ca fiind de 30 mg per porție zilnică, similară cu cea din PowerCocktail.</li>
+                <li><strong>Alte ingrediente:</strong> Formula include dextroză/glucoză, pulbere de sfeclă roșie și pulbere de alge marine.</li>
+            </ul>
+
+            <h3>FitLine TopShape: un complex botanic pentru metabolism</h3>
+            <p>TopShape este un supliment sub formă de capsule, promovat pentru susținerea metabolismului macronutrienților și al acizilor grași. Compoziția sa este un amestec complex de extracte din plante și micronutrienți:</p>
+            <ul>
+                <li><strong>Amestec botanic:</strong> Conține extract de drojdie (<em>Saccharomyces cerevisiae</em>), extract de pepene amar (<em>Momordica charantia</em>), extract de boabe de cafea verde, extract de dud alb (<em>Morus alba</em>), extract de iarbă-grasă (<em>Portulaca oleracea</em>), extract de frunze de mentă, extract de păpădie (<em>Taraxacum officinale</em>), extract de mate verde și extract de ghimbir.</li>
+                <li><strong>Micronutrienți:</strong> Formula este suplimentată cu zinc (gluconat de zinc) și biotină.</li>
+                <li><strong>Excipienți:</strong> Include hidroxipropilmetilceluloză (capsula), fosfat de calciu și inulină.</li>
+            </ul>
+
+            <h3>FitLine Munogen: o formulă pentru formarea sângelui și reducerea oboselii</h3>
+            <p>Munogen este un supliment sub formă de capsule care conține o combinație de aminoacizi, extracte din plante și vitamine din complexul B, având ca scop susținerea formării celulelor roșii și a sângelui.</p>
+            <ul>
+                <li><strong>Aminoacizi:</strong> Conține L-arginină și L-citrulină, cunoscuți ca precursori ai oxidului nitric.</li>
+                <li><strong>Extracte din plante:</strong> Include un amestec de extracte din struguri și mere (conține sulfiți) și extract de grâu incaș (<em>Amaranthus hypochondriacus</em>).</li>
+                <li><strong>Complex de vitamine B:</strong> Este fortificat cu vitamina B6, vitamina B12 și acid folic (vitamina B9).</li>
+            </ul>
+
+            <h3>FitLine Gelenk-Fit: un supliment pentru articulații și cartilaje</h3>
+            <p>Gelenk-Fit este un produs sub formă de pulbere, cu aromă de lămâie, destinat susținerii funcției normale a oaselor și cartilajelor.</p>
+            <ul>
+                <li><strong>Componente structurale:</strong> Ingredientele de bază sunt sulfatul de glucozamină și sulfatul de condroitină, componente esențiale ale cartilajului articular.</li>
+                <li><strong>Micronutrienți de susținere:</strong> Formula include vitamina C, zinc și cupru.</li>
+                <li><strong>Componentă botanică:</strong> Conține un extract de curcuma.</li>
+            </ul>
+
+            <h3>FitLine Zellschutz Antioxy: un complex antioxidant</h3>
+            <p>Zellschutz (tradus ca „protecție celulară”) este un supliment sub formă de pulbere cu aromă de portocale, formulat pentru a proteja celulele împotriva stresului oxidativ.</p>
+            <ul>
+                <li><strong>Complex de vitamine antioxidante:</strong> Conține vitamina C, vitamina E și provitamina A (sub formă de beta-caroten și carotenoide mixte).</li>
+                <li><strong>Seleniu:</strong> Include seleniu, un oligoelement esențial cu rol în sistemul de apărare antioxidant al organismului.</li>
+                <li><strong>Bioflavonoide:</strong> Conține bioflavonoide din portocale, compuși polifenolici cunoscuți pentru proprietățile lor antioxidante.</li>
+            </ul>
+
+            <h3>FitLine IB5: un spray oral pentru sistemul imunitar</h3>
+            <p>IB5 este un spray oral conceput pentru a oferi un suport rapid sistemului imunitar. Formula sa lichidă combină vitamine, extracte din plante și beta-glucani.</p>
+            <ul>
+                <li><strong>Vitamine:</strong> Conține un amestec de vitamine, inclusiv vitamina A, D3, E, K2, B2 (riboflavină), B12 și biotină.</li>
+                <li><strong>Extracte din plante și uleiuri:</strong> Include ulei de mentă, ulei de cimbru, extract de cuișoare, extract de ghimbir și extract din semințe de struguri (sau grapefruit, conform unor surse).</li>
+                <li><strong>Componentă imunomodulatoare:</strong> Conține beta-glucani din drojdie (<em>Saccharomyces cerevisiae</em>).</li>
+            </ul>
+            
+            <h3>FitLine ProShape All-in-1: un înlocuitor de masă pentru controlul greutății</h3>
+            <p>Acest produs este un shake conceput ca înlocuitor de masă în cadrul dietelor cu restricție calorică, având ca scop pierderea sau menținerea greutății. Formula sa este complexă, furnizând macronutrienți, vitamine și minerale, alături de extracte botanice.</p>
+            <ul>
+                <li><strong>Bază proteică și carbohidrați:</strong> Conține proteine din lapte (lapte praf degresat, proteină din lapte, proteină din zer) și carbohidrați (zahăr, maltodextrină).</li>
+                <li><strong>Fibre și excipienți:</strong> Include fibre precum inulina, tărâțe de ovăz și coji de psyllium, alături de agenți de îngroșare (gumă de guar, pectină) și ulei de soia.</li>
+                <li><strong>Amestec botanic:</strong> Conține extracte de cafea verde, mate verde și urzică. Acestea adaugă un efect stimulant (cofeină) și potențial diuretic.</li>
+                <li><strong>Profil complet de micronutrienți:</strong> Este fortificat cu un spectru larg de vitamine (A, C, D, E, K, complexul B) și minerale (magneziu, potasiu, seleniu, fier, zinc, mangan, cupru, iod). Prezența vitaminei K impune o atenționare specifică pentru pacienții care utilizează warfarină.</li>
+            </ul>
+
+            <h3>FitLine ProShape Amino: un complex de aminoacizi esențiali</h3>
+            <p>ProShape Amino este un supliment sub formă de capsule, destinat în special sportivilor, pentru a susține menținerea și creșterea masei musculare.</p>
+            <ul>
+                <li><strong>Compoziție:</strong> Conține un amestec de 8 aminoacizi esențiali: L-Leucină, L-Valină, L-Izoleucină (aminoacizi cu catenă ramificată - BCAA), clorhidrat de L-Lizină, L-Fenilalanină, L-Treonină, L-Metionină și L-Triptofan. Aceștia sunt aminoacizi pe care organismul nu îi poate sintetiza și trebuie obținuți din dietă.</li>
+            </ul>
+
+            <p>Consumul intensiv, implică un model de utilizare care depășește doza zilnică recomandată pentru un singur produs, incluzând și consumul concomitent al mai multor produse. Această practică duce la un efect de „suprapunere” sau „cumulare” a ingredientelor comune. De exemplu, un consumator care utilizează atât PowerCocktail, cât și Activize Oxyplus, își dublează aportul de vitamine din complexul B și de cofeină. Această cumulare transformă regimul dintr-unul de suplimentare nutrițională într-unul cu doze farmacologice, cu efecte fiziologice previzibile și un potențial crescut de evenimente adverse. Un exemplu elocvent este niacina: PowerCocktail conține 30 mg, iar o formulare a Activize Oxyplus conține 59 mg. Un consumator al ambelor produse ar putea ingera aproximativ 90 mg de niacină, o doză care depășește cu mult pragul de siguranță pentru forma de acid nicotinic (10 mg/zi) și care este suficientă pentru a induce reacții adverse vizibile, precum înroșirea pielii.</p>
+            <p>Mai mult, etichetele produselor utilizează adesea termeni generici (de ex., „niacină”, „magneziu”) fără a specifica forma chimică exactă (de ex., acid nicotinic vs. nicotinamidă; oxid de magneziu vs. citrat de magneziu). Aceasta este o omisiune critică cu implicații clinice directe. Efectul clinic depinde în totalitate de forma chimică nedeclarată. În cazul niacinei, o doză de 30 mg de acid nicotinic este suficientă pentru a provoca înroșirea pielii, în timp ce aceeași doză de nicotinamidă nu are acest efect. Lipsa de specificitate introduce o variabilă semnificativă care complică evaluarea riscurilor și obligă clinicianul să ia în considerare cel mai nefavorabil scenariu.</p>
+
+            <h3>Tabelul 1: Matricea compozițională a produselor FitLine selectate</h3>
+            <p>Următorul tabel consolidează datele despre ingredientele cheie, comparând dozele per porție cu limitele de siguranță stabilite (Doza Maximă Tolerabilă - UL).</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ingredient</th>
+                        <th>Sursa Produsului</th>
+                        <th>Doza per Porție</th>
+                        <th>Forma Chimică (dacă este specificată)</th>
+                        <th>Doza Maximă Tolerabilă (UL) Adult</th>
+                        <th>% din UL per Porție</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Niacină (Vitamina B3)</td>
+                        <td>PowerCocktail</td>
+                        <td>30 mg NE</td>
+                        <td>Nespecificată</td>
+                        <td>10 mg (acid nicotinic) / 900 mg (nicotinamidă)</td>
+                        <td><strong>300%</strong> (dacă este acid nicotinic)</td>
+                    </tr>
+                    <tr>
+                        <td>Niacină (Vitamina B3)</td>
+                        <td>Activize Oxyplus</td>
+                        <td>17 - 59 mg</td>
+                        <td>Nespecificată</td>
+                        <td>10 mg (acid nicotinic) / 900 mg (nicotinamidă)</td>
+                        <td><strong>170% - 590%</strong> (dacă este acid nicotinic)</td>
+                    </tr>
+                    <tr>
+                        <td>Piridoxină (Vitamina B6)</td>
+                        <td>PowerCocktail</td>
+                        <td>2,9 mg</td>
+                        <td>Clorhidrat de piridoxină</td>
+                        <td>100 mg (SUA) / 25 mg (UE)</td>
+                        <td>2,9% (SUA) / 11,6% (UE)</td>
+                    </tr>
+                    <tr>
+                        <td>Piridoxină (Vitamina B6)</td>
+                        <td>Activize Oxyplus</td>
+                        <td>3 mg</td>
+                        <td>Clorhidrat de piridoxină</td>
+                        <td>100 mg (SUA) / 25 mg (UE)</td>
+                        <td>3% (SUA) / 12% (UE)</td>
+                    </tr>
+                    <tr>
+                        <td>Biotină (Vitamina B7)</td>
+                        <td>PowerCocktail</td>
+                        <td>60 µg</td>
+                        <td>Nespecificată</td>
+                        <td>N/A (nu există UL stabilit)</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Biotină (Vitamina B7)</td>
+                        <td>Activize Oxyplus</td>
+                        <td>104 µg</td>
+                        <td>Nespecificată</td>
+                        <td>N/A (nu există UL stabilit)</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Calciu</td>
+                        <td>Restorate</td>
+                        <td>268 mg</td>
+                        <td>Carbonat, Lactat</td>
+                        <td>2500 mg</td>
+                        <td>10,7%</td>
+                    </tr>
+                    <tr>
+                        <td>Magneziu</td>
+                        <td>Restorate</td>
+                        <td>134 mg</td>
+                        <td>Carbonat, Citrat</td>
+                        <td>350 mg (din suplimente)</td>
+                        <td>38,3%</td>
+                    </tr>
+                    <tr>
+                        <td>Zinc</td>
+                        <td>Restorate</td>
+                        <td>10 mg</td>
+                        <td>Gluconat</td>
+                        <td>40 mg</td>
+                        <td>25%</td>
+                    </tr>
+                    <tr>
+                        <td>Crom</td>
+                        <td>Restorate</td>
+                        <td>60 µg</td>
+                        <td>Picolinat</td>
+                        <td>N/A (nu există UL stabilit)</td>
+                        <td>N/A</td>
+                    </tr>
+                    <tr>
+                        <td>Cofeină</td>
+                        <td>PowerCocktail</td>
+                        <td>30 mg</td>
+                        <td>Din extract de guarana</td>
+                        <td>400 mg</td>
+                        <td>7,5%</td>
+                    </tr>
+                    <tr>
+                        <td>Cofeină</td>
+                        <td>Activize Oxyplus</td>
+                        <td>30 mg</td>
+                        <td>Din extract de guarana</td>
+                        <td>400 mg</td>
+                        <td>7,5%</td>
+                    </tr>
+                </tbody>
+            </table>
+            <p><em>Notă: Valorile UL (Tolerable Upper Intake Level) pot varia în funcție de autoritatea de reglementare (de ex., EFSA în Europa, FNB în SUA). Valorile prezentate sunt orientative. Procentul din UL pentru niacină este calculat presupunând forma de acid nicotinic, care reprezintă cel mai mare risc.</em></p>
+        </div>
+
+        <div id="riscuri-vitaminice" class="tab-content">
+            <h2>Evaluarea riscurilor componentelor vitaminice</h2>
+            <p>Această secțiune efectuează o analiză aprofundată a vitaminelor prezente în doze care necesită o examinare clinică atentă, concentrându-se pe efectele adverse și interacțiunile bine documentate.</p>
+            
+            <h3>Niacina (vitamina B3): efecte vasodilatatoare, reacții de înroșire și limite de tolerabilitate</h3>
+            <p>PowerCocktail conține 30 mg NE de niacină per porție, în timp ce Activize Oxyplus poate conține între 17 mg și 59 mg, în funcție de versiunea produsului. Reacția vasodilatatoare de „înroșire” (flushing), caracterizată prin roșeață, senzație de arsură și prurit la nivelul pielii, este un efect cunoscut al formei de acid nicotinic a niacinei, apărând frecvent la doze ce depășesc 30-50 mg. Producătorul însuși avertizează asupra unei posibile „înroșiri temporare și o senzație de căldură și furnicături”, confirmând prezența unei forme și a unei doze farmacologic active.</p>
+            <p>Autoritatea Europeană pentru Siguranța Alimentară (EFSA) a stabilit o Doză Maximă Tolerabilă (UL) pentru acidul nicotinic de 10 mg/zi pentru adulți. O singură porție de PowerCocktail sau Activize Oxyplus depășește semnificativ această limită de siguranță. Pentru un pacient cu rozacee, angină pectorală instabilă sau antecedente de hipotensiune arterială, efectul vasodilatator potent ar putea exacerba afecțiunea. Mai mult, înroșirea poate fi confundată cu o reacție alergică, provocând anxietate pacientului și potențial ducând la intervenții medicale nejustificate.</p>
+
+            <h3>Piridoxina (vitamina B6): riscul de neuropatie periferică dependent de doză și durată</h3>
+            <p>PowerCocktail conține 2,9 mg de vitamina B6, iar Activize Oxyplus conține 3 mg. Consumul cronic de doze mari de vitamina B6 este legat fără echivoc de dezvoltarea neuropatiei senzoriale periferice, manifestată prin furnicături, amorțeală și senzație de arsură la nivelul extremităților. Deși istoric asociată cu doze foarte mari (peste 200 mg/zi), dovezi recente și alerte de siguranță emise de organisme de reglementare, precum TGA din Australia, indică faptul că neuropatia periferică poate apărea și la doze mai mici de 50 mg/zi. Riscul este agravat de consumul mai multor suplimente care conțin vitamina B6. TGA impune acum avertismente pe produsele cu doze zilnice de peste 10 mg. Acesta reprezintă un antagonism critic pentru orice pacient cu neuropatie preexistentă (de ex., neuropatie diabetică) sau pentru cei care urmează un tratament cu agenți chimioterapeutici neurotoxici. Suplimentul ar putea induce o nouă neuropatie sau ar putea agrava una existentă, complicând tabloul clinic și ducând la investigații diagnostice inutile.</p>
+
+            <h3>Biotina (vitamina B7): interferența dozelor mari cu imunoanalizele clinice de laborator</h3>
+            <p>PowerCocktail conține 60 µg de biotină, iar Activize Oxyplus până la 104 µg, în condițiile în care aportul adecvat pentru adulți este de 30 µg/zi. Suplimentarea cu doze mari de biotină este o cauză bine documentată de interferență analitică în imunoanalizele care utilizează mecanismul de legare streptavidină-biotină. Acest lucru poate duce la rezultate fals crescute sau fals scăzute pentru numeroase teste de laborator critice.</p>
+            <p>Testele afectate includ analize de importanță vitală, precum hormonii tiroidieni (TSH, T3, T4), troponina (un marker pentru infarctul miocardic), gonadotropina corionică umană (hCG, pentru sarcină) și diverși hormoni steroizi și peptidici. Antagonismul în acest caz nu este cu o afecțiune sau un medicament, ci cu însuși procesul de diagnostic. Un pacient care consumă doze mari de biotină ar putea prezenta rezultate de laborator care indică în mod fals boala Graves, ducând la un tratament inadecvat cu medicamente antitiroidiene. În mod similar, un nivel fals scăzut al troponinei ar putea duce la externarea prematură a unui pacient care suferă un infarct miocardic. Acest fenomen, denumit „momeală de diagnostic”, reprezintă un risc grav pentru siguranța pacientului, deoarece corupe datele obiective pe care se bazează deciziile clinice critice, putând iniția o cascadă de daune iatrogene: tratamente inutile și potențial periculoase sunt inițiate, în timp ce intervenții necesare și salvatoare de vieți sunt omise.</p>
+
+            <h3>Vitaminele liposolubile (A, D, E): considerații privind aportul cronic supraterapeutic</h3>
+            <p>Dozele per porție de vitamine liposolubile din produsele FitLine sunt în general în limite de siguranță:</p>
+            <ul>
+                <li><strong>Vitamina A:</strong> PowerCocktail furnizează 333 µg RE din beta-caroten, o formă precursoare sigură.</li>
+                <li><strong>Vitamina D:</strong> Restorate furnizează 7,5 µg (300 UI).</li>
+                <li><strong>Vitamina E:</strong> PowerCocktail furnizează 10 mg α-TE.</li>
+            </ul>
+            <p>Cu toate acestea,un consum intensiv ridică posibilitatea unui aport cronic care depășește dozele maxime tolerabile, ducând la toxicitate. Acest lucru este deosebit de relevant pentru vitaminele liposolubile, care sunt stocate în organism. De exemplu, un aport cronic ridicat de vitamina E poate interfera cu coagularea sângelui și poate crește riscul de sângerare, un efect care ar fi aditiv cu cel al altor ingrediente din PowerCocktail, precum curcuma și ghimbirul.</p>
+
+            <h3>Vitamina K: antagonism direct cu anticoagulantele cumarinice</h3>
+            <p>Produsele IB5 și ProShape All-in-1 conțin vitamina K (sub formă de K2 în IB5). Vitamina K este un cofactor esențial în sinteza hepatică a factorilor de coagulare II, VII, IX și X. Anticoagulantele orale din clasa cumarinicelor, precum warfarina, acționează prin inhibarea ciclului vitaminei K, reducând astfel capacitatea de coagulare a sângelui. Suplimentarea cu vitamina K, indiferent de forma sa (K1 sau K2), poate anula direct efectul terapeutic al warfarinei, ducând la scăderea INR-ului (International Normalized Ratio) și la un risc crescut de evenimente tromboembolice. Pentru un pacient tratat cu warfarină pentru fibrilație atrială, tromboză venoasă profundă sau valve cardiace mecanice, introducerea unui supliment cu vitamina K, chiar și în doze mici, este contraindicată fără o monitorizare strictă și o ajustare a dozei de anticoagulant. ProShape All-in-1 poartă o atenționare specifică în acest sens. Aceasta reprezintă o interacțiune directă și previzibilă, care subminează scopul principal al terapiei anticoagulante.</p>
+        </div>
+
+        <div id="riscuri-minerale" class="tab-content">
+            <h2>Evaluarea riscurilor componentelor minerale</h2>
+            <p>Această secțiune se concentrează pe mineralele cu un potențial ridicat de interacțiuni medicamentoase clinic semnificative sau de efecte adverse legate de suplimentare, în special cele găsite în FitLine Restorate.</p>
+
+            <h3>Suplimentarea cu calciu: o examinare a controversei privind riscul cardiovascular</h3>
+            <p>Restorate furnizează 268 mg de calciu per porție. O parte semnificativă a cercetărilor a explorat o posibilă legătură între <em>suplimentele</em> de calciu (spre deosebire de calciul din alimentație) și un risc crescut de evenimente cardiovasculare, în special infarct miocardic. Mecanismul propus implică modificări bruște ale nivelurilor serice de calciu după o doză bolus dintr-un supliment, ceea ce ar putea promova calcifierea vasculară.</p>
+            <p>Riscul pare a fi cel mai pronunțat în anumite populații. Un studiu amplu a constatat un risc semnificativ mai mare de evenimente cardiovasculare și de mortalitate asociat cu utilizarea suplimentelor de calciu la pacienții cu diabet, dar nu și la cei fără diabet. Prin urmare, pentru un pacient cu boală coronariană cunoscută, antecedente de infarct miocardic sau diabet, utilizarea unui supliment care conține calciu, precum Restorate, nu este benignă. Aceasta introduce un factor de risc potențial, deși controversat, pentru evenimente cardiovasculare adverse, care trebuie cântărit în raport cu orice beneficiu potențial.</p>
+
+            <h3>Magneziul: o revizuire a interacțiunilor sale medicamentoase extinse și clinic semnificative</h3>
+            <p>Restorate conține 134 mg de magneziu per porție. Magneziul este un cation divalent care poate lega (chela) numeroase medicamente în tractul gastrointestinal, reducând semnificativ absorbția și biodisponibilitatea acestora. Aceasta este o interacțiune critică.</p>
+            <ul>
+                <li><strong>Medicamente afectate:</strong> Interacțiunea afectează clase întregi de antibiotice (tetracicline precum doxiciclina; fluorochinolone precum ciprofloxacina), bisfosfonați pentru osteoporoză (de ex., alendronat) și hormonul tiroidian (levotiroxină).</li>
+                <li><strong>Management:</strong> Eșalonarea administrării este crucială (de ex., administrarea antibioticului cu 2 ore înainte sau cu 4-6 ore după suplimentul de magneziu). Nerespectarea acestei reguli poate duce la eșecul tratamentului unei infecții sau afecțiuni grave.</li>
+            </ul>
+            <p>Aceste interacțiuni de chelare depășesc un simplu „efect secundar”. Ele au potențialul de a anula complet efectul terapeutic al unor medicamente critice, salvatoare de vieți. De exemplu, un pacient tratat pentru pneumonie cu doxiciclină care ia simultan Restorate poate să nu atingă niciodată concentrațiile serice de antibiotic necesare pentru a eradica infecția. Rezultatul este un eșec clinic al tratamentului, cu potențial de progresie a bolii către sepsis și deces. Suplimentul nu a cauzat doar un efect secundar; a sabotat activ intervenția medicală primară.</p>
+
+            <h3>Zincul: interacțiuni documentate cu terapii antibiotice și diuretice</h3>
+            <p>Restorate furnizează 10 mg de zinc per porție. Similar magneziului, zincul poate reduce absorbția și eficacitatea antibioticelor din clasa chinolonelor și tetraciclinelor. De asemenea, poate interfera cu absorbția cefalexinei. Eșalonarea corectă a dozelor este esențială pentru a preveni eșecul tratamentului. În plus, utilizarea pe termen lung a diureticelor tiazidice poate crește excreția urinară de zinc, ducând potențial la deficiență.</p>
+
+            <h3>Cromul: implicații pentru controlul glicemic și interacțiuni cu agenții antidiabetici</h3>
+            <p>Restorate conține 60 µg de crom, adesea sub formă de picolinat de crom. Se consideră că cromul potențează acțiunea insulinei, îmbunătățind sensibilitatea la insulină și utilizarea glucozei. Datorită acestui efect potențial asupra glicemiei, suplimentele de crom pot avea un efect aditiv cu insulina sau cu agenții hipoglicemianți orali (de ex., metformina), crescând riscul de hipoglicemie.</p>
+            <p>Pentru un pacient cu diabet zaharat bine controlat, adăugarea unui supliment cu crom fără o ajustare corespunzătoare a medicației antidiabetice ar putea duce la episoade periculoase de hipoglicemie. Suplimentul acționează ca un „destabilizator tăcut” al unui regim terapeutic anterior stabil, introducând o variabilă perturbatoare într-un sistem atent echilibrat și ducând la confuzie și pierderea controlului glicemic.</p>
+        </div>
+
+        <div id="riscuri-botanice" class="tab-content">
+            <h2>Analiza componentelor botanice bioactive</h2>
+            <p>Această secțiune evaluează proprietățile farmacologice și riscurile potențiale ale ingredientelor non-vitaminice și non-minerale, care au adesea efecte puternice și mai puțin reglementate.</p>
+
+            <h3>Extractul de guarana: conținut de cofeină, efecte simpatomimetice și implicații cardiovasculare</h3>
+            <p>Prezent în PowerCocktail și Activize Oxyplus, extractul de guarana furnizează 30 mg de cofeină per porție. Semințele de guarana sunt o sursă deosebit de potentă de cofeină (2-8% din greutate), semnificativ mai mult decât boabele de cafea. Cofeină este un stimulent al sistemului nervos central cu efecte cronotrope (creșterea frecvenței cardiace) și inotrope (creșterea contractilității) pozitive. Poate crește tensiunea arterială și a fost asociată cu aritmii la persoanele susceptibile. Pentru pacienții cu hipertensiune arterială, aritmii (precum fibrilația atrială), tulburări de anxietate sau boală cardiacă ischemică, adăugarea unui stimulent este contraindicată.</p>
+
+            <h3>Extracte din plante cu efecte hemostatice (curcuma, ghimbir): potențarea riscului de sângerare</h3>
+            <p>Extractele de curcuma (curcumină) și ghimbir sunt prezente în PowerCocktail. Ambele au proprietăți care pot afecta hemostaza:</p>
+            <ul>
+                <li><strong>Curcuma/Curcumina:</strong> Datele in vitro sugerează că inhibă agregarea plachetară. Au fost raportate cazuri de creștere a INR-ului la pacienții tratați cu warfarină care au început să consume produse cu curcumă.</li>
+                <li><strong>Ghimbirul:</strong> Este cunoscut pentru inhibarea tromboxan sintetazei, ceea ce poate prelungi timpul de sângerare.</li>
+            </ul>
+            <p>Aceasta este o interacțiune critică. Pentru un pacient care urmează un tratament cu orice anticoagulant (warfarină, anticoagulante orale directe precum apixaban) sau agent antiplachetar (aspirină, clopidogrel), adăugarea acestor suplimente creează un efect aditiv sau sinergic, crescând semnificativ riscul de sângerare majoră. Combinația de ingrediente bioactive multiple într-un singur produs creează o stare de „polifarmacie internă”. Produsul în sine este o combinație de mai multe substanțe active cu riscuri sinergice. Un pacient care ia PowerCocktail consumă simultan două substanțe cu efecte „de subțiere a sângelui”, creând un efect aditiv care potențează acțiunea medicamentului anticoagulant prescris.</p>
+
+            <h3>Extractul de ceai verde: potențialul de hepatotoxicitate idiosincrazică indusă de catechine</h3>
+            <p>Extractul de ceai verde este listat ca ingredient în PowerCocktail și Activize Oxyplus. Deși infuziile de ceai verde sunt în general sigure, extractele concentrate utilizate în suplimente au fost asociate cu cazuri rare, dar severe, de leziuni hepatice idiosincrazice (hepatotoxicitate), care pot progresa spre insuficiență hepatică acută. EFSA a concluzionat că dozele de 800 mg/zi sau mai mari de epigalocatechin-3-galat (EGCG), principala catechină, pot prezenta riscuri pentru sănătate. Cu toate acestea, deoarece reacția este idiosincrazică (o reacție rară, imprevizibilă, specifică machiajului genetic al unui individ), nu a fost posibilă identificarea unei doze cu adevărat „sigure”. Acesta este un motiv major de îngrijorare pentru orice pacient cu boală hepatică preexistentă sau pentru cei care iau alte medicamente potențial hepatotoxice.</p>
+
+            <h3>Culturi probiotice (Lactobacillus spp.): contraindicații la pacienții imunocompromiși</h3>
+            <p>PowerCocktail conține <em>Lactobacillus acidophilus</em> și <em>Lactobacillus reuteri</em>. La persoanele cu sisteme imunitare grav compromise sau cu bariere intestinale afectate, aceste bacterii „prietenoase” pot trece din intestin în fluxul sanguin (translocație), provocând infecții sistemice precum bacteriemia sau sepsisul. Utilizarea probioticelor este contraindicată la pacienții grav imunocompromiși (de ex., neutropenie, post-transplant sub imunosupresie de inducție, HIV avansat cu CD4 scăzut), pacienții în stare critică la terapie intensivă și pacienții cu catetere venoase centrale. Pentru un pacient care urmează chimioterapie, un primitor de transplant de organe sau o persoană cu SIDA avansată, consumul de PowerCocktail nu este doar nerecomandat; este periculos și ar putea duce la o infecție care îi poate pune viața în pericol.</p>
+
+            <h3>Glucozamină și condroitină (Gelenk-Fit): interacțiuni cu anticoagulantele</h3>
+            <p>Gelenk-Fit conține sulfat de glucozamină și sulfat de condroitină. Deși mecanismul nu este pe deplin elucidat, au fost raportate cazuri de creștere a INR-ului și a riscului de sângerare la pacienții care iau warfarină și încep concomitent suplimentarea cu glucozamină, cu sau fără condroitină. Deși unele studii pe animale nu au confirmat o interacțiune farmacocinetică directă, rapoartele de caz din practica clinică sugerează o potențare a efectului anticoagulant. Prin urmare, se recomandă prudență și monitorizarea atentă a INR-ului la pacienții aflați sub tratament cu warfarină care inițiază sau întrerup suplimentarea cu aceste produse.</p>
+
+            <h3>L-Arginină și L-Citrulină (Munogen): implicații pentru tensiunea arterială</h3>
+            <p>Munogen conține L-arginină și L-citrulină, aminoacizi care acționează ca precursori pentru sinteza oxidului nitric (NO), un vasodilatator endogen potent. Suplimentarea cu L-arginină poate reduce tensiunea arterială. Această proprietate duce la un antagonism direct cu medicamentele antihipertensive (de ex., inhibitori ECA, blocante ale canalelor de calciu, diuretice), putând potența efectul acestora și crescând riscul de hipotensiune. De asemenea, L-arginina poate interacționa cu medicamentele utilizate pentru disfuncția erectilă (inhibitori de fosfodiesterază-5, cum ar fi sildenafilul) și cu nitrații, ducând la scăderi periculoase ale tensiunii arteriale.</p>
+
+            <h3>Extracte botanice multiple (TopShape și ProShape All-in-1): riscuri aditive</h3>
+            <p>TopShape și ProShape All-in-1 conțin amestecuri complexe de extracte din plante, fiecare cu propriul său profil farmacologic.</p>
+            <ul>
+                <li><strong>Efecte hipoglicemiante:</strong> Extractul de pepene amar și extractul de dud alb (în TopShape) sunt cunoscute pentru proprietățile lor de scădere a glicemiei. Acestea pot avea un efect aditiv cu medicamentele antidiabetice (de ex., metformină, insulină, sulfonilureice), crescând semnificativ riscul de hipoglicemie. Extractul de urzică (în ProShape All-in-1) poate avea, de asemenea, efecte hipoglicemiante.</li>
+                <li><strong>Efecte stimulante și cardiovasculare:</strong> Extractul de boabe de cafea verde și extractul de mate verde (în ambele produse) conțin cofeină, un stimulent al sistemului nervos central. Acestea pot crește tensiunea arterială și frecvența cardiacă, interacționând cu medicamentele antihipertensive și antiaritmice și fiind contraindicate la pacienții cu afecțiuni cardiovasculare preexistente.</li>
+                <li><strong>Efect diuretic:</strong> Extractul de păpădie (în TopShape) și extractul de urzică (în ProShape All-in-1) au proprietăți diuretice, ceea ce poate duce la un efect aditiv cu medicamentele diuretice, crescând riscul de deshidratare și dezechilibre electrolitice. De asemenea, pot interacționa cu litiul, reducându-i clearance-ul.</li>
+            </ul>
+
+            <h3>Bioflavonoide din citrice (Zellschutz Antioxy): inhibarea citocromului P450</h3>
+            <p>Zellschutz Antioxy conține bioflavonoide din portocale. Flavonoidele și furanocumarinele prezente în citrice, în special în grapefruit, sunt inhibitori puternici ai enzimei citocrom P450 3A4 (CYP3A4) din peretele intestinal. CYP3A4 este responsabilă pentru metabolizarea a aproximativ 50% dintre medicamentele prescrise clinic. Prin inhibarea acestei enzime, suplimentul poate crește dramatic biodisponibilitatea și concentrațiile plasmatice ale multor medicamente, ducând la toxicitate. Medicamentele afectate includ, dar nu se limitează la, anumite statine (de ex., simvastatină, atorvastatină), blocante ale canalelor de calciu (de ex., felodipină), imunosupresoare (de ex., ciclosporină) și multe altele. Aceasta este una dintre cele mai semnificative interacțiuni supliment-medicament, cu potențial de evenimente adverse grave.</p>
+
+            <h3>Uleiuri esențiale și beta-glucani (IB5): riscuri hemostatice și imune</h3>
+            <p>Produsul IB5 conține o combinație de ingrediente cu efecte distincte asupra hemostazei și sistemului imunitar.</p>
+            <ul>
+                <li><strong>Ulei de cimbru și extract de cuișoare:</strong> Acestea conțin eugenol, un compus cu proprietăți antiplachetare. Similar ghimbirului și curcumei, acestea pot crește riscul de sângerare la pacienții care iau anticoagulante sau antiplachetare.</li>
+                <li><strong>Beta-glucani din drojdie:</strong> Acești polizaharizi sunt cunoscuți pentru proprietățile lor imunomodulatoare, stimulând adesea activitatea sistemului imunitar. Această acțiune poate intra în conflict direct cu medicamentele imunosupresoare (de ex., cele utilizate după un transplant de organe sau în boli autoimune), reducându-le eficacitatea. Prin urmare, utilizarea lor este contraindicată la pacienții care primesc terapie imunosupresoare.</li>
+            </ul>
+
+            <h3>Aminoacizi esențiali (ProShape Amino): considerații pentru afecțiuni renale și metabolice</h3>
+            <p>ProShape Amino furnizează un amestec concentrat de aminoacizi esențiali. Deși sunt vitali pentru sinteza proteinelor, aportul lor în doze mari, sub formă de supliment, necesită prudență în anumite condiții clinice.</p>
+            <ul>
+                <li><strong>Suprasolicitare renală:</strong> La pacienții cu boală cronică de rinichi preexistentă, un aport ridicat de proteine sau aminoacizi poate crește sarcina de filtrare a rinichilor și poate accelera progresia bolii. Prin urmare, astfel de suplimente trebuie utilizate cu prudență și sub supraveghere medicală la această populație.</li>
+                <li><strong>Fenilcetonuria (PKU):</strong> Produsul conține L-Fenilalanină. PKU este o afecțiune genetică rară în care organismul nu poate metaboliza acest aminoacid. Acumularea sa este toxică pentru sistemul nervos central. Orice produs care conține fenilalanină este absolut contraindicat la pacienții cu PKU.</li>
+                <li><strong>Competiția pentru transportul la nivelul barierei hemato-encefalice:</strong> Aminoacizii cu catenă ramificată (BCAA: leucină, izoleucină, valină), prezenți în cantități mari în produs, concurează cu aminoacizii aromatici (triptofan, fenilalanină, tirozină) pentru același transportor la nivelul barierei hemato-encefalice. Un aport masiv de BCAA ar putea, teoretic, să scadă nivelul de triptofan din creier, afectând sinteza serotoninei, un neurotransmițător important pentru starea de spirit și somn.</li>
+            </ul>
+            <p>Marketingul acestor produse sub umbrela generală a sănătății și a stării de bine poate masca prezența unor substanțe potente, farmacologic active, care altfel ar fi supuse unei examinări mai atente. Această strategie creează un decalaj de percepție între imaginea benignă a produsului și realitatea sa farmacologică complexă, crescând probabilitatea ca pacienții cu risc ridicat să consume fără să știe substanțe care sunt direct contraindicate pentru starea lor.</p>
+        </div>
+
+        <div id="sinteza" class="tab-content">
+            <h2>Sinteza antagonismelor potențiale și recomandări clinice</h2>
+            <p>Această secțiune finală integrează toate constatările într-un cadru practic pentru luarea deciziilor clinice, oferind instrumente acționabile pentru furnizorii de servicii medicale.</p>
+
+            <h3>Rezumatul ingredientelor cu risc ridicat și a căilor de interacțiune cheie</h3>
+            <p>Constatările indică riscuri multiple și semnificative asociate cu un consum intensiv al produselor FitLine:</p>
+            <ul>
+                <li><strong>Cardiovascular:</strong> Riscuri aditive de la stimulente (guarana, cafea verde, mate), calciu (potențială calcifiere vasculară), niacină (vasodilatație) și precursori de oxid nitric (L-arginină, L-citrulină) care pot duce la hipotensiune.</li>
+                <li><strong>Hemostatic:</strong> Risc sinergic de sângerare de la curcuma, ghimbir, ulei de cuișoare, doze mari de vitamina E și potențial de la glucozamină/condroitină, în special în combinație cu anticoagulante/antiplachetare. Antagonism direct al vitaminei K cu warfarina (din IB5 și ProShape All-in-1).</li>
+                <li><strong>Hepatic:</strong> Risc imprevizibil de hepatotoxicitate idiosincrazică de la extractul de ceai verde.</li>
+                <li><strong>Neurologic:</strong> Risc de neuropatie periferică dependent de doză și durată de la vitamina B6.</li>
+                <li><strong>Infecțios:</strong> Risc de sepsis indus de probiotice la populațiile imunocompromise.</li>
+                <li><strong>Metabolic/Endocrin:</strong> Risc crescut de hipoglicemie prin efectul aditiv al cromului, pepenelui amar, dudului alb și urzicii cu medicamentele antidiabetice.</li>
+                <li><strong>Renal:</strong> Risc de suprasolicitare la pacienții cu boală cronică de rinichi din cauza aportului ridicat de aminoacizi (ProShape Amino).</li>
+                <li><strong>Farmacocinetic:</strong> Anularea terapeutică a medicamentelor critice (antibiotice, bisfosfonați) prin chelarea mineralelor (magneziu, zinc). Creșterea toxicității medicamentelor prin inhibarea CYP3A4 de către bioflavonoidele din citrice.</li>
+                <li><strong>Imunologic:</strong> Interferența beta-glucanilor cu terapia imunosupresoare.</li>
+                <li><strong>Diagnostic:</strong> Coruperea testelor vitale de laborator prin interferența biotinei.</li>
+            </ul>
+
+            <h3>Stratificarea riscului specifică pacientului: un cadru pentru evaluarea clinică</h3>
+            <p>Se recomandă utilizarea unei liste de verificare pentru a evalua eligibilitatea unui pacient pentru aceste produse:</p>
+            <ul>
+                <li><strong>Boli cardiovasculare (BC, aritmii, HTA):</strong> Verificați utilizarea stimulentelor (guarana, cafea verde, mate), a calciului și a precursorilor de NO (L-arginină/L-citrulină).</li>
+                <li><strong>Diabet zaharat:</strong> Verificați utilizarea cromului, pepenelui amar, dudului alb, urzicii (risc de hipoglicemie) și a calciului (risc cardiovascular crescut).</li>
+                <li><strong>Tulburări de sângerare sau utilizare de anticoagulante:</strong> Verificați utilizarea de curcuma, ghimbir, vitamina E, ulei de cuișoare, glucozamină/condroitină. Contraindicație relativă. Verificați utilizarea vitaminei K (contraindicație pentru warfarină).</li>
+                <li><strong>Stare de imunocompromitere (chimioterapie, transplant, HIV):</strong> Contraindicație absolută pentru produsele cu probiotice (PowerCocktail) și cele cu beta-glucani (IB5).</li>
+                <li><strong>Boli hepatice:</strong> Verificați utilizarea extractului de ceai verde.</li>
+                <li><strong>Boli renale:</strong> Prudență la produsele cu aport proteic/aminoacidic ridicat (ProShape Amino).</li>
+                <li><strong>Fenilcetonurie (PKU):</strong> Contraindicație absolută pentru produsele cu fenilalanină (ProShape Amino).</li>
+                <li><strong>Neuropatie:</strong> Verificați utilizarea vitaminei B6.</li>
+                <li><strong>Pacienți în polifarmacie:</strong> Alertă ridicată pentru interacțiunile mineral-medicament (magneziu, zinc) și pentru inhibarea CYP3A4 de către bioflavonoide (Zellschutz).</li>
+            </ul>
+
+            <h3>Recomandări pentru monitorizarea pacientului, întreruperea suplimentării și consiliere</h3>
+            <ul>
+                <li><strong>Reconcilierea suplimentelor:</strong> Clinicienii ar trebui să efectueze o „reconciliere a suplimentelor” cu aceeași rigoare ca o reconciliere a medicamentelor, întrebând în mod specific despre produse cu ingrediente multiple precum cele de la FitLine.</li>
+                <li><strong>Întreruperea țintită:</strong> Se recomandă încetarea produselor specifice pe baza stratificării riscului. De exemplu, orice pacient imunocompromis trebuie sfătuit să oprească imediat consumul de PowerCocktail și IB5.</li>
+                <li><strong>Consilierea pacientului:</strong> Pacienții trebuie educați că „natural” nu înseamnă „sigur” și că suplimentele cu ingrediente multiple prezintă riscuri complexe de polifarmacie. Pacienții trebuie sfătuiți să înceteze administrarea tuturor suplimentelor cu cel puțin 48-72 de ore înainte de orice test de laborator pentru a evita interferența biotinei.</li>
+            </ul>
+
+            <h3>Tabelul 2: Matricea antagonismelor potențiale</h3>
+            <p>Acest tabel servește ca un instrument clinic rapid pentru a identifica potențialele conflicte.</p>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Ingredient FitLine</th>
+                        <th>Clasa de Medicamente Interacționantă</th>
+                        <th>Afecțiune Medicală Contraindicată/Cu Risc Ridicat</th>
+                        <th>Natura Antagonismului</th>
+                        <th>Recomandare Clinică</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Niacină (B3)</strong></td>
+                        <td>-</td>
+                        <td>Rozacee, Angină Instabilă, Hipotensiune</td>
+                        <td>Vasodilatație, înroșirea pielii (flushing)</td>
+                        <td>Prudență; monitorizare</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Piridoxină (B6)</strong></td>
+                        <td>Agenți neurotoxici (unele chimioterapice)</td>
+                        <td>Neuropatie preexistentă (diabetică, etc.)</td>
+                        <td>Risc de neuropatie periferică senzorială</td>
+                        <td>Evitați consumul cronic/intensiv</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Biotină (B7)</strong></td>
+                        <td>Toate imunoanalizele bazate pe streptavidină-biotină</td>
+                        <td>Orice condiție care necesită monitorizare de laborator</td>
+                        <td>Interferență analitică (rezultate fals crescute/scăzute)</td>
+                        <td>Întrerupeți cu 48-72h înainte de analize</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Vitamina K</strong></td>
+                        <td>Anticoagulante cumarinice (warfarină)</td>
+                        <td>Stări care necesită anticoagulare (FA, TVP)</td>
+                        <td>Anularea efectului anticoagulant</td>
+                        <td>Contraindicație absolută</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Calciu</strong></td>
+                        <td>-</td>
+                        <td>Diabet zaharat, Boală coronariană cunoscută</td>
+                        <td>Risc potențial crescut de evenimente cardiovasculare</td>
+                        <td>Discutați riscuri vs. beneficii; preferați surse alimentare</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Magneziu</strong></td>
+                        <td>Antibiotice (tetracicline, chinolone), Bisfosfonați, Levotiroxină</td>
+                        <td>-</td>
+                        <td>Reducerea absorbției medicamentelor (chelare)</td>
+                        <td>Eșalonați dozele (2h înainte, 4-6h după)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Zinc</strong></td>
+                        <td>Antibiotice (tetracicline, chinolone, cefalexină)</td>
+                        <td>-</td>
+                        <td>Reducerea absorbției antibioticelor (chelare)</td>
+                        <td>Eșalonați dozele (la min. 3h distanță)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Crom</strong></td>
+                        <td>Antidiabetice (insulină, metformină)</td>
+                        <td>Diabet zaharat (în special bine controlat)</td>
+                        <td>Risc crescut de hipoglicemie</td>
+                        <td>Monitorizați glicemia îndeaproape; ajustați dozele</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Guarana, Cafea Verde, Mate (Cofeină)</strong></td>
+                        <td>Stimulente, unele medicamente pentru astm</td>
+                        <td>HTA, Aritmii, Anxietate, Boală cardiacă ischemică</td>
+                        <td>Efecte simpatomimetice (creșterea FC și TA)</td>
+                        <td>Evitați combinația</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Curcuma, Ghimbir, Ulei de Cuișoare</strong></td>
+                        <td>Anticoagulante (warfarină, DOAC), Antiplachetare (aspirină, clopidogrel)</td>
+                        <td>Tulburări de coagulare</td>
+                        <td>Risc crescut de sângerare</td>
+                        <td>Evitați combinația; monitorizați INR</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Extract de Ceai Verde</strong></td>
+                        <td>Medicamente hepatotoxice</td>
+                        <td>Boli hepatice preexistente (ciroză, hepatită)</td>
+                        <td>Risc de hepatotoxicitate idiosincrazică</td>
+                        <td>Evitați combinația</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Probiotice</strong></td>
+                        <td>Imunosupresoare</td>
+                        <td>Stări de imunodeficiență severă (neutropenie, post-transplant, HIV avansat), pacienți în stare critică</td>
+                        <td>Risc de translocație bacteriană și sepsis</td>
+                        <td>Contraindicație absolută</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Glucozamină/Condroitină</strong></td>
+                        <td>Warfarină</td>
+                        <td>-</td>
+                        <td>Potențarea efectului anticoagulant (risc de sângerare)</td>
+                        <td>Prudență; monitorizați INR</td>
+                    </tr>
+                    <tr>
+                        <td><strong>L-Arginină/L-Citrulină</strong></td>
+                        <td>Antihipertensive, Nitrați, Inhibitori de PDE-5</td>
+                        <td>Hipotensiune</td>
+                        <td>Vasodilatație aditivă, risc de hipotensiune severă</td>
+                        <td>Evitați combinația</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Pepene Amar, Dud Alb, Urzică</strong></td>
+                        <td>Antidiabetice (insulină, metformină)</td>
+                        <td>Diabet zaharat</td>
+                        <td>Risc crescut de hipoglicemie</td>
+                        <td>Monitorizați glicemia îndeaproape</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Păpădie, Urzică</strong></td>
+                        <td>Diuretice, Litiu</td>
+                        <td>Boli renale</td>
+                        <td>Efect diuretic aditiv, risc de toxicitate la litiu</td>
+                        <td>Evitați combinația</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Bioflavonoide din Citrice</strong></td>
+                        <td>Substraturi ale CYP3A4 (statine, blocante de calciu, etc.)</td>
+                        <td>Polifarmacie</td>
+                        <td>Inhibarea metabolismului medicamentelor, risc de toxicitate</td>
+                        <td>Evitați combinația</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Beta-glucani</strong></td>
+                        <td>Imunosupresoare</td>
+                        <td>Boli autoimune, post-transplant</td>
+                        <td>Antagonizarea efectului imunosupresor</td>
+                        <td>Contraindicație absolută</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Aminoacizi esențiali</strong></td>
+                        <td>-</td>
+                        <td>Boli renale cronice, Fenilcetonurie (PKU)</td>
+                        <td>Suprasolicitare renală, contraindicație metabolică</td>
+                        <td>Prudență / Evitare; Contraindicație absolută în PKU</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <footer class="ztabs-footer">
+            <p>Copyright &copy; 2025 - dr.ing. Radu Pascu</p>
+        </footer>
+    </div>
+
+    <script>
+        function openTab(evt, tabName) {
+            // Declararea variabilelor
+            let i, tabcontent, tablinks;
+
+            // Ascunde toate elementele cu clasa "tab-content"
+            tabcontent = document.getElementsByClassName("tab-content");
+            for (i = 0; i < tabcontent.length; i++) {
+                tabcontent[i].style.display = "none";
+            }
+
+            // Elimină clasa "active" de la toate butoanele cu clasa "tab-link"
+            tablinks = document.getElementsByClassName("tab-link");
+            for (i = 0; i < tablinks.length; i++) {
+                tablinks[i].className = tablinks[i].className.replace(" active", "");
+            }
+
+            // Afișează tab-ul curent și adaugă clasa "active" butonului care l-a deschis
+            document.getElementById(tabName).style.display = "block";
+            evt.currentTarget.className += " active";
+        }
+
+        // Deschide primul tab în mod implicit la încărcarea paginii
+        document.addEventListener("DOMContentLoaded", function() {
+            // Caută primul buton și dă clic pe el pentru a afișa primul tab
+            if (document.getElementsByClassName('tab-link').length > 0) {
+                document.getElementsByClassName('tab-link')[0].click();
+            }
+        });
+    </script>
+
+</body>
+</html>
